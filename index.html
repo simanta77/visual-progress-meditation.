@@ -1,205 +1,802 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Goals Visual Tracker</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>10,000 meditation goal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        iron: '#64748b',
+                        bronze: '#d97706',
+                        silver: '#94a3b8',
+                        gold: '#eab308',
+                        diamond: '#06b6d4',
+                        champion: '#8b5cf6',
+                        expert: '#10b981',
+                        master: '#f43f5e',
+                        legend: '#ec4899',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.6);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(100, 116, 139, 0.4);
+            border-radius: 4px;
+        }
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+        /* Prevent rubber-banding on iOS while keeping smooth touch scrolling */
+        body {
+            overscroll-behavior-y: none;
+            -webkit-tap-highlight-color: transparent;
+            padding-bottom: calc(5rem + env(safe-area-inset-bottom));
+        }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background: #0f172a;
-      color: #e5e7eb;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
+        /* Glassmorphism utility */
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
 
-    body {
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      height: -webkit-fill-available; /* iPhone fix */
-      padding-top: env(safe-area-inset-top);
-      padding-bottom: env(safe-area-inset-bottom);
-    }
+        /* Touch-friendly slider thumb */
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 26px;
+            width: 26px;
+            border-radius: 50%;
+            background: #eab308;
+            cursor: pointer;
+            box-shadow: 0 0 14px rgba(234, 179, 8, 0.7);
+            border: 2px solid #ffffff;
+        }
+        input[type=range]::-moz-range-thumb {
+            height: 26px;
+            width: 26px;
+            border-radius: 50%;
+            background: #eab308;
+            cursor: pointer;
+            box-shadow: 0 0 14px rgba(234, 179, 8, 0.7);
+            border: 2px solid #ffffff;
+        }
 
-    .app {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden; /* no scroll unless needed */
-    }
+        /* Micro-responsive fluid progress bar transition */
+        .progress-fill {
+            transition: width 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: width;
+        }
 
-    .top-section {
-      padding: 6px;
-      padding-left: 16px;
-      padding-right: 16px;
-      width: 100%;
-      max-width: 500px;
-      margin: 1 auto;
-      margin-bottom: 8px;
-      flex-shrink: 0;
-    }
-
-    h1, p {
-      margin: 0 0 12px 0;
-      text-align: center;
-    }
-
-    p {
-      color: #9ca3af;
-    }
-
-    .inputs {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    label {
-      font-size: 14px;
-      color: #d1d5db;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    input {
-      padding: 10px 12px;
-      border-radius: 10px;
-      border: 1px solid #4b5563;
-      background: #020617;
-      color: #e5e7eb;
-      font-size: 16px;
-    }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      border-radius: 999px;
-      border: none;
-      background: #22c55e;
-      color: #022c22;
-      font-weight: 600;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .chart-area {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 6px;
-      padding-bottom: calc(70px + env(safe-area-inset-bottom)); /* ⭐ extra bottom space */
-      min-height: 0; /* critical for iPhone flexbox */
-    }
-
-    .canvas-wrapper {
-      width: 100%;
-      max-width: 600px;
-      aspect-ratio: 1 / 1; /* perfect circle */
-      position: relative;
-    }
-
-    canvas {
-      width: 100% !important;
-      height: 100% !important;
-    }
-  </style>
+        .safe-pb {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
 </head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans antialiased selection:bg-amber-500 selection:text-slate-950">
 
-<body>
-  <div class="app">
-    <div class="top-section">
-      <h2>Goals Visual Tracker</h2>
-      <div class="inputs">
-        <label>
-          Goals done so far
-          <input type="number" id="hoursDone" placeholder="e.g. 120" min="0" step="0.1" />
-        </label>
+    <!-- TOP HEADER -->
+    <header class="sticky top-0 z-40 w-full glass-panel border-b border-slate-800/80 px-4 py-3">
+        <div class="max-w-5xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div id="headerLeagueEmblem" class="w-9 h-9 rounded-xl flex items-center justify-center bg-slate-900 border border-slate-800 shadow-inner">
+                    <!-- Dynamic SVG Emblem -->
+                </div>
+                <div>
+                    <h1 class="font-bold text-base tracking-tight bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-500 bg-clip-text text-transparent">
+                        10,000 meditation goal
+                    </h1>
+                    <p class="text-[10px] text-slate-400 font-medium tracking-wide uppercase">iPhone 15 Pro Max Edition</p>
+                </div>
+            </div>
 
-        <label>
-          Goal hours
-          <input type="number" id="goalHours" placeholder="e.g. 10000" min="1" step="1" />
-        </label>
-      </div>
+            <!-- Header Quick Hours Badge -->
+            <button onclick="promptCustomHours()" class="flex items-center space-x-2 bg-slate-900/90 border border-amber-500/30 px-3 py-1.5 rounded-full hover:border-amber-400 transition active:scale-95">
+                <i class="fa-solid fa-pen-to-square text-amber-400 text-xs"></i>
+                <span id="headerHoursBadge" class="text-xs font-mono font-bold text-amber-300">0 / 10,000 hrs</span>
+            </button>
+        </div>
+    </header>
 
-      <button id="updateBtn">Update chart</button>
-    </div>
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-1 max-w-5xl w-full mx-auto p-4 space-y-6">
 
-    <div class="chart-area">
-      <div class="canvas-wrapper">
-        <canvas id="meditationChart"></canvas>
-      </div>
-    </div>
-  </div>
+        <!-- ================= TAB 1: DASHBOARD (MAIN TRACKER) ================= -->
+        <section id="page-tracker" class="tab-page space-y-6">
+            <!-- Hero Rank Card -->
+            <div id="heroCard" class="glass-panel rounded-3xl p-6 relative overflow-hidden transition-all duration-500 border border-slate-700/50 shadow-2xl">
+                <!-- Background Accent Blur -->
+                <div id="heroGlowBg" class="absolute -right-16 -top-16 w-64 h-64 rounded-full blur-3xl opacity-20 pointer-events-none transition-all duration-700 bg-amber-500"></div>
 
-  <script>
-    const hoursDoneInput = document.getElementById("hoursDone");
-    const goalHoursInput = document.getElementById("goalHours");
-    const updateBtn = document.getElementById("updateBtn");
-    const ctx = document.getElementById("meditationChart");
+                <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                    <!-- Left Emblem & Titles -->
+                    <div class="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-5 text-center sm:text-left">
+                        <div id="heroEmblemContainer" class="w-22 h-22 sm:w-24 sm:h-24 rounded-2xl glass-panel flex items-center justify-center p-3 shadow-2xl border border-slate-600/40">
+                            <!-- SVG Emblem Inserted by JS -->
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-center sm:justify-start space-x-2">
+                                <span id="heroLeagueBadge" class="text-[11px] font-extrabold uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-slate-900 border border-slate-700">
+                                    IRON LEAGUE
+                                </span>
+                                <span id="heroSubRankStepTag" class="text-[11px] font-mono font-bold text-slate-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">
+                                    STEP 1 / 162
+                                </span>
+                            </div>
+                            <h2 id="heroSubRankTitle" class="text-3xl font-black tracking-tight mt-1 text-white">
+                                Iron E-
+                            </h2>
+                            <p id="heroSubRankDesc" class="text-xs text-slate-400 mt-1 max-w-md italic">
+                                "Laying the foundations of mental stillness."
+                            </p>
+                        </div>
+                    </div>
 
-    /* ⭐ Gradient (unchanged) */
-    const gradient = ctx.getContext("2d").createLinearGradient(0, 0, 0, 300);
-    gradient.addColorStop(0, "#bbf7d0");
-    gradient.addColorStop(0.5, "#86efac");
-    gradient.addColorStop(1, "#4ade80");
+                    <!-- Right Total Hours Banner -->
+                    <div class="text-center md:text-right bg-slate-900/80 border border-slate-800/80 px-5 py-3.5 rounded-2xl w-full md:w-auto">
+                        <div class="text-[11px] text-slate-400 font-semibold uppercase tracking-wider">Total Meditation Completed</div>
+                        <div class="flex items-baseline justify-center md:justify-end space-x-1.5 mt-0.5">
+                            <span id="heroCurrentHours" class="text-3xl sm:text-4xl font-black font-mono tracking-tight text-amber-400">0</span>
+                            <span class="text-sm font-bold text-slate-500">/ 10,000 hrs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    let chart;
+            <!-- TOTAL HOURS CONTROL CARD -->
+            <div class="glass-panel rounded-3xl p-5 space-y-5 border border-slate-800">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center space-x-2">
+                        <i class="fa-solid fa-sliders text-amber-400"></i>
+                        <span>Direct Hour Entry & Adjustments</span>
+                    </h3>
+                    <span class="text-[11px] text-slate-400 font-mono">Strict Whole Hours</span>
+                </div>
 
-    function createOrUpdateChart(done, goal) {
-      const remaining = Math.max(goal - done, 0);
+                <!-- Range Slider -->
+                <div class="space-y-2">
+                    <input type="range" id="hoursSlider" min="0" max="10000" value="0" step="1" 
+                        class="w-full h-3 bg-slate-900 rounded-lg appearance-none cursor-pointer border border-slate-800">
+                    <div class="flex justify-between text-[10px] text-slate-500 font-mono font-bold">
+                        <span>0h (Iron)</span>
+                        <span>2,500h</span>
+                        <span>5,000h</span>
+                        <span>7,500h</span>
+                        <span>10,000h (Legend S+)</span>
+                    </div>
+                </div>
 
-      /* ⭐ FIX: ensure tiny slices always render correctly */
-      const epsilon = 0.0000001;
+                <!-- Quick Adjuster Buttons -->
+                <div class="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                    <button onclick="adjustHours(-1)" class="py-3 rounded-xl bg-slate-900 hover:bg-slate-800 active:bg-slate-700 text-rose-300 text-xs font-mono font-extrabold border border-rose-900/40 transition active:scale-95 shadow">-1h</button>
+                    <button onclick="adjustHours(1)" class="py-3 rounded-xl bg-slate-900 hover:bg-slate-800 active:bg-slate-700 text-amber-300 text-xs font-mono font-extrabold border border-amber-500/30 transition active:scale-95 shadow">+1h</button>
+                    <button onclick="adjustHours(5)" class="py-3 rounded-xl bg-slate-900 hover:bg-slate-800 active:bg-slate-700 text-amber-300 text-xs font-mono font-extrabold border border-amber-500/30 transition active:scale-95 shadow">+5h</button>
+                    <button onclick="adjustHours(25)" class="py-3 rounded-xl bg-slate-900 hover:bg-slate-800 active:bg-slate-700 text-amber-300 text-xs font-mono font-extrabold border border-amber-500/30 transition active:scale-95 shadow">+25h</button>
+                    <button onclick="adjustHours(100)" class="py-3 rounded-xl bg-slate-900 hover:bg-slate-800 active:bg-slate-700 text-amber-300 text-xs font-mono font-extrabold border border-amber-500/30 transition active:scale-95 shadow">+100h</button>
+                    <button onclick="adjustHours(500)" class="py-3 rounded-xl bg-slate-900 hover:bg-slate-800 active:bg-slate-700 text-amber-300 text-xs font-mono font-extrabold border border-amber-500/30 transition active:scale-95 shadow">+500h</button>
+                </div>
+            </div>
 
-      const data = {
-        labels: ["Done", "Remaining"],
-        datasets: [
-          {
-            data: [done + epsilon, remaining],
-            backgroundColor: [gradient, "#1f2933"],
-            borderWidth: 0,
-          },
-        ],
-      };
+            <!-- SIDE-BY-SIDE TRIPLE COMPARATIVE PROGRESS METERS -->
+            <div class="space-y-3">
+                <div class="flex items-center justify-between px-1">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center space-x-2">
+                        <i class="fa-solid fa-chart-simple text-amber-400"></i>
+                        <span>Comparative Progress Meters</span>
+                    </h3>
+                    <span class="text-[11px] text-slate-400 font-mono">Exact Truncated %</span>
+                </div>
 
-      const options = {
-        responsive: true,
-        maintainAspectRatio: false,
-        cutout: "70%",
-        plugins: { legend: { display: false } }
-      };
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- 1. Next Sub-Rank Progress Meter -->
+                    <div class="glass-panel p-4 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">SUB-RANK STEP</div>
+                                <div id="meterSubRankTitle" class="text-xs font-black text-white mt-0.5">To Iron E</div>
+                            </div>
+                            <span id="meterSubRankPct" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                                0.0%
+                            </span>
+                        </div>
+                        <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden p-0.5 border border-slate-800">
+                            <div id="meterSubRankBar" class="progress-fill h-full bg-amber-400 rounded-full" style="width: 0%"></div>
+                        </div>
+                        <div class="flex justify-between text-[10px] font-mono text-slate-400">
+                            <span id="meterSubRankCurrent">0 hrs</span>
+                            <span id="meterSubRankTarget">Target: 62 hrs</span>
+                        </div>
+                        <div id="meterSubRankRemaining" class="text-[10px] text-slate-500 font-mono italic">
+                            62 hrs remaining to advance
+                        </div>
+                    </div>
 
-      if (chart) {
-        chart.data = data;
-        chart.update();
-      } else {
-        chart = new Chart(ctx, { type: "doughnut", data, options });
-      }
-    }
+                    <!-- 2. Next Major League Relative Progress Meter -->
+                    <div class="glass-panel p-4 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">MAJOR LEAGUE</div>
+                                <div id="meterLeagueTitle" class="text-xs font-black text-white mt-0.5">To Bronze League</div>
+                            </div>
+                            <span id="meterLeaguePct" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                                0.0%
+                            </span>
+                        </div>
+                        <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden p-0.5 border border-slate-800">
+                            <div id="meterLeagueBar" class="progress-fill h-full bg-cyan-400 rounded-full" style="width: 0%"></div>
+                        </div>
+                        <div class="flex justify-between text-[10px] font-mono text-slate-400">
+                            <span id="meterLeagueCurrent">0 hrs</span>
+                            <span id="meterLeagueTarget">Target: 1,111 hrs</span>
+                        </div>
+                        <div id="meterLeagueRemaining" class="text-[10px] text-slate-500 font-mono italic">
+                            1,111 hrs remaining to Bronze
+                        </div>
+                    </div>
 
-    function update() {
-      const done = parseFloat(hoursDoneInput.value);
-      const goal = parseFloat(goalHoursInput.value);
+                    <!-- 3. Grand 10,000h Journey Cap Meter -->
+                    <div class="glass-panel p-4 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">GRAND JOURNEY</div>
+                                <div class="text-xs font-black text-white mt-0.5">10,000h Legend S+</div>
+                            </div>
+                            <span id="meterGrandPct" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-pink-500/20 text-pink-300 border border-pink-500/30">
+                                0.0%
+                            </span>
+                        </div>
+                        <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden p-0.5 border border-slate-800">
+                            <div id="meterGrandBar" class="progress-fill h-full bg-pink-500 rounded-full" style="width: 0%"></div>
+                        </div>
+                        <div class="flex justify-between text-[10px] font-mono text-slate-400">
+                            <span id="meterGrandCurrent">0 hrs</span>
+                            <span>Cap: 10,000 hrs</span>
+                        </div>
+                        <div id="meterGrandRemaining" class="text-[10px] text-slate-500 font-mono italic">
+                            10,000 hours remaining to 10k
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      if (!isNaN(done) && !isNaN(goal) && goal > 0) {
-        createOrUpdateChart(Math.min(done, goal), goal);
-      }
-    }
+        <!-- ================= TAB 2: 162 LADDER ================= -->
+        <section id="page-hierarchy" class="tab-page hidden space-y-6">
+            <div class="glass-panel rounded-3xl p-5 space-y-5 border border-slate-800">
+                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 border-b border-slate-800 pb-4">
+                    <div>
+                        <h2 class="text-lg font-extrabold text-white flex items-center space-x-2">
+                            <i class="fa-solid fa-layer-group text-amber-400"></i>
+                            <span>162 Sub-Rank Ladder</span>
+                        </h2>
+                        <p class="text-xs text-slate-400 mt-0.5">All 9 Major Leagues & 18 Sub-Ranks with clean whole-hour bounds.</p>
+                    </div>
 
-    updateBtn.addEventListener("click", update);
-    goalHoursInput.value = 1000;
-  </script>
+                    <!-- Filter Dropdown -->
+                    <select id="leagueFilterSelect" onchange="renderHierarchy(this.value)" 
+                        class="bg-slate-900 border border-slate-700 text-xs rounded-xl px-3 py-2 text-slate-200 font-semibold focus:outline-none focus:border-amber-500">
+                        <option value="ALL">All Leagues (9 Leagues / 162 Ranks)</option>
+                        <option value="Iron">1. Iron League (0 - 1,111h)</option>
+                        <option value="Bronze">2. Bronze League (1,111 - 2,222h)</option>
+                        <option value="Silver">3. Silver League (2,222 - 3,333h)</option>
+                        <option value="Gold">4. Gold League (3,333 - 4,444h)</option>
+                        <option value="Diamond">5. Diamond League (4,444 - 5,556h)</option>
+                        <option value="Champion">6. Champion League (5,556 - 6,667h)</option>
+                        <option value="Expert">7. Expert League (6,667 - 7,778h)</option>
+                        <option value="Master">8. Master League (7,778 - 8,889h)</option>
+                        <option value="Legend">9. Legend League (8,889 - 10,000h)</option>
+                    </select>
+                </div>
+
+                <!-- Sub-Rank Accordion List -->
+                <div id="hierarchyContainer" class="space-y-4">
+                    <!-- JS Injected -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 3: PROJECTIONS ================= -->
+        <section id="page-projections" class="tab-page hidden space-y-6">
+            <div class="glass-panel rounded-3xl p-5 space-y-5 border border-slate-800">
+                <div class="border-b border-slate-800 pb-4">
+                    <h2 class="text-lg font-extrabold text-white flex items-center space-x-2">
+                        <i class="fa-solid fa-calculator text-amber-400"></i>
+                        <span>Time Projections & Estimates</span>
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-0.5">Calculate completion dates for all sub-ranks and major leagues (up to 24 hrs/day).</p>
+                </div>
+
+                <!-- Rate Input Controls -->
+                <div class="space-y-3 bg-slate-900/80 p-4 rounded-2xl border border-slate-800">
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                        <label class="text-xs font-bold uppercase tracking-wider text-slate-300">Planned Daily Practice Rate</label>
+                        <div class="flex items-center space-x-2">
+                            <input type="number" id="customPaceInput" min="0.1" max="24" step="0.1" value="1.5" oninput="onCustomPaceChange(this.value)" 
+                                class="w-20 bg-slate-950 border border-amber-500/50 rounded-lg px-2.5 py-1 text-xs font-mono font-bold text-amber-400 focus:outline-none text-center">
+                            <span class="text-xs font-semibold text-slate-400">hrs / day</span>
+                        </div>
+                    </div>
+
+                    <!-- Quick Preset Pills -->
+                    <div class="grid grid-cols-4 sm:grid-cols-6 gap-2 pt-1">
+                        <button onclick="setPace(0.5)" id="pace-0.5" class="pace-btn py-1.5 rounded-lg border border-slate-800 bg-slate-950 text-xs font-mono text-slate-300">0.5h</button>
+                        <button onclick="setPace(1.0)" id="pace-1.0" class="pace-btn py-1.5 rounded-lg border border-slate-800 bg-slate-950 text-xs font-mono text-slate-300">1.0h</button>
+                        <button onclick="setPace(1.5)" id="pace-1.5" class="pace-btn py-1.5 rounded-lg border border-amber-500/50 bg-amber-950/40 text-xs font-mono font-bold text-amber-300">1.5h</button>
+                        <button onclick="setPace(2.0)" id="pace-2.0" class="pace-btn py-1.5 rounded-lg border border-slate-800 bg-slate-950 text-xs font-mono text-slate-300">2.0h</button>
+                        <button onclick="setPace(4.0)" id="pace-4.0" class="pace-btn py-1.5 rounded-lg border border-slate-800 bg-slate-950 text-xs font-mono text-slate-300">4.0h</button>
+                        <button onclick="setPace(8.0)" id="pace-8.0" class="pace-btn py-1.5 rounded-lg border border-slate-800 bg-slate-950 text-xs font-mono text-slate-300">8.0h</button>
+                    </div>
+                </div>
+
+                <!-- Major League Projections Table -->
+                <div class="space-y-2">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Major League Completion Roadmap</h3>
+                    <div class="overflow-x-auto rounded-2xl border border-slate-800">
+                        <table class="w-full text-left border-collapse text-xs">
+                            <thead>
+                                <tr class="bg-slate-900 text-slate-400 uppercase font-semibold border-b border-slate-800 text-[10px]">
+                                    <th class="py-2.5 px-3">League</th>
+                                    <th class="py-2.5 px-3">Cap Hours</th>
+                                    <th class="py-2.5 px-3">Hours Left</th>
+                                    <th class="py-2.5 px-3">Days Left</th>
+                                    <th class="py-2.5 px-3 text-right">Target Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leagueProjectionsBody" class="divide-y divide-slate-800/60 font-mono bg-slate-950/40">
+                                <!-- JS Injected -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Sub-Rank Step Roadmap Table -->
+                <div class="space-y-2">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Upcoming Sub-Rank Steps (Next 18 Steps)</h3>
+                    <div class="overflow-x-auto rounded-2xl border border-slate-800 max-h-72">
+                        <table class="w-full text-left border-collapse text-xs">
+                            <thead>
+                                <tr class="bg-slate-900 text-slate-400 uppercase font-semibold border-b border-slate-800 text-[10px] sticky top-0 z-10">
+                                    <th class="py-2.5 px-3">Sub-Rank</th>
+                                    <th class="py-2.5 px-3">Boundary</th>
+                                    <th class="py-2.5 px-3">Hours Left</th>
+                                    <th class="py-2.5 px-3">Days Left</th>
+                                    <th class="py-2.5 px-3 text-right">Target Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="subRankProjectionsBody" class="divide-y divide-slate-800/60 font-mono bg-slate-950/40">
+                                <!-- JS Injected -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FIXED BOTTOM THUMB NAVIGATION BAR (STRICTLY 3 TABS FOR IPHONE 15 PRO MAX) -->
+    <nav class="fixed bottom-0 left-0 right-0 glass-panel border-t border-slate-800/90 z-50 px-3 py-2 safe-pb">
+        <div class="max-w-md mx-auto grid grid-cols-3 gap-1 text-center">
+            <button onclick="switchTab('tracker')" id="tab-btn-tracker" class="py-1.5 rounded-xl flex flex-col items-center justify-center text-amber-400 transition">
+                <i class="fa-solid fa-gauge-high text-base"></i>
+                <span class="text-[10px] font-bold mt-0.5">Dashboard</span>
+            </button>
+            <button onclick="switchTab('hierarchy')" id="tab-btn-hierarchy" class="py-1.5 rounded-xl flex flex-col items-center justify-center text-slate-400 transition">
+                <i class="fa-solid fa-layer-group text-base"></i>
+                <span class="text-[10px] font-bold mt-0.5">162 Ladder</span>
+            </button>
+            <button onclick="switchTab('projections')" id="tab-btn-projections" class="py-1.5 rounded-xl flex flex-col items-center justify-center text-slate-400 transition">
+                <i class="fa-solid fa-calculator text-base"></i>
+                <span class="text-[10px] font-bold mt-0.5">Projections</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- JAVASCRIPT APPLICATION LOGIC -->
+    <script>
+        /* ==========================================================================
+           1. STRICT 9 LEAGUES & 162 SUB-RANKS MATH DATA ARCHITECTURE
+           ========================================================================== */
+
+        const SUB_RANK_STEPS = ["E-", "E", "E+", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+", "S-", "S", "S+"];
+
+        // Exact 9 Leagues in ascending sequence with high-contrast progress bar colors (barColor)
+        const LEAGUES = [
+            { id: 1, name: "Iron", color: "#d6ffda", barColor: "#d6ffda", startHour: 0, endHour: 1111, quote: "Grounding posture and breath stability." },
+            { id: 2, name: "Bronze", color: "#d97706", barColor: "#fbbf24", startHour: 1111, endHour: 2222, quote: "Spark of stillness, reducing mental wander." },
+            { id: 3, name: "Silver", color: "#abffff", barColor: "#abffff", startHour: 2222, endHour: 3333, quote: "Refined clarity and tranquil presence." },
+            { id: 4, name: "Gold", color: "#eab308", barColor: "#facc15", startHour: 3333, endHour: 4444, quote: "Radiant single-pointed attention." },
+            { id: 5, name: "Diamond", color: "#06b6d4", barColor: "#22d3ee", startHour: 4444, endHour: 5556, quote: "Luminous non-reactive awareness." },
+            { id: 6, name: "Champion", color: "#8b5cf6", barColor: "#a78bfa", startHour: 5556, endHour: 6667, quote: "Effortless stability amidst sensation." },
+            { id: 7, name: "Expert", color: "#10b981", barColor: "#34d399", startHour: 6667, endHour: 7778, quote: "Profound insight into impermanence." },
+            { id: 8, name: "Master", color: "#f43f5e", barColor: "#fb7185", startHour: 7778, endHour: 8889, quote: "Seamless mindfulness in action." },
+            { id: 9, name: "Legend", color: "#ec4899", barColor: "#f472b6", startHour: 8889, endHour: 10000, quote: "Unshakable non-dual mastery." }
+        ];
+
+        // Generate all 162 sub-ranks cleanly mapped across 10,000 hours
+        const ALL_SUB_RANKS = [];
+        let globalIndex = 1;
+
+        LEAGUES.forEach(league => {
+            const leagueSpan = league.endHour - league.startHour;
+            const stepSpan = leagueSpan / 18;
+
+            SUB_RANK_STEPS.forEach((step, idx) => {
+                const subStart = Math.round(league.startHour + (idx * stepSpan));
+                const subEnd = idx === 17 ? league.endHour : Math.round(league.startHour + ((idx + 1) * stepSpan));
+
+                ALL_SUB_RANKS.push({
+                    globalIndex: globalIndex++,
+                    leagueName: league.name,
+                    leagueColor: league.color,
+                    leagueBarColor: league.barColor,
+                    stepCode: step,
+                    fullTitle: `${league.name} ${step}`,
+                    startHour: subStart,
+                    endHour: subEnd,
+                    requiredHours: subEnd - subStart,
+                    quote: league.quote
+                });
+            });
+        });
+
+        /* ==========================================================================
+           2. APP STATE MANAGEMENT
+           ========================================================================== */
+
+        let currentHours = 0;
+        let activeTab = 'tracker';
+        let plannedPace = 1.5;
+
+        // Load saved state
+        try {
+            const saved = localStorage.getItem('satori_meditation_hours');
+            if (saved !== null) {
+                currentHours = Math.max(0, Math.min(10000, parseInt(saved, 10) || 0));
+            }
+        } catch (e) {}
+
+        /* ==========================================================================
+           3. SVG EMBLEM ARTWORK GENERATOR
+           ========================================================================== */
+
+        function getLeagueSVG(leagueName, size = 48) {
+            const league = LEAGUES.find(l => l.name === leagueName) || LEAGUES[0];
+            const c = league.color;
+
+            return `
+            <svg width="${size}" height="${size}" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="32" r="28" fill="${c}" fill-opacity="0.18" stroke="${c}" stroke-width="2.5"/>
+                <circle cx="32" cy="32" r="20" stroke="${c}" stroke-width="1.5" stroke-dasharray="4 3"/>
+                <path d="M32 14 L42 24 L42 40 L32 50 L22 40 L22 24 Z" fill="none" stroke="${c}" stroke-width="2.2" stroke-linejoin="round"/>
+                <circle cx="32" cy="32" r="6" fill="${c}"/>
+            </svg>
+            `;
+        }
+
+        /* ==========================================================================
+           4. MATHEMATICAL TRUNCATION & BOUND HELPERS
+           ========================================================================== */
+
+        function getSubRank(hours) {
+            const h = Math.max(0, Math.min(10000, hours));
+            if (h >= 10000) return ALL_SUB_RANKS[ALL_SUB_RANKS.length - 1];
+            return ALL_SUB_RANKS.find(sr => h >= sr.startHour && h < sr.endHour) || ALL_SUB_RANKS[0];
+        }
+
+        function getLeague(hours) {
+            const h = Math.max(0, Math.min(10000, hours));
+            if (h >= 10000) return LEAGUES[LEAGUES.length - 1];
+            return LEAGUES.find(l => h >= l.startHour && h < l.endHour) || LEAGUES[0];
+        }
+
+        // Exact 1-decimal truncated percentage (no rounding up/down)
+        function formatTruncatedPct(val) {
+            if (val >= 100) return "100.0%";
+            if (val <= 0) return "0.0%";
+            const truncated = Math.floor(val * 10) / 10;
+            return truncated.toFixed(1) + "%";
+        }
+
+        /* ==========================================================================
+           5. DASHBOARD UI REFRESH ENGINE
+           ========================================================================== */
+
+        function updateUI() {
+            const subRank = getSubRank(currentHours);
+            const league = getLeague(currentHours);
+
+            // Persist
+            try {
+                localStorage.setItem('satori_meditation_hours', currentHours.toString());
+            } catch (e) {}
+
+            // Header Elements
+            document.getElementById('headerHoursBadge').textContent = `${currentHours.toLocaleString()} / 10,000 hrs`;
+            document.getElementById('headerLeagueEmblem').innerHTML = getLeagueSVG(league.name, 26);
+
+            // Hero Card
+            document.getElementById('heroEmblemContainer').innerHTML = getLeagueSVG(league.name, 60);
+            document.getElementById('heroLeagueBadge').textContent = `${league.name.toUpperCase()} LEAGUE`;
+            document.getElementById('heroLeagueBadge').style.color = league.color;
+            document.getElementById('heroSubRankStepTag').textContent = `STEP ${subRank.globalIndex} / 162`;
+            document.getElementById('heroSubRankTitle').textContent = subRank.fullTitle;
+            document.getElementById('heroSubRankDesc').textContent = `"${subRank.quote}"`;
+            document.getElementById('heroCurrentHours').textContent = currentHours.toLocaleString();
+            document.getElementById('heroGlowBg').style.backgroundColor = league.color;
+
+            // Slider Position Sync
+            const slider = document.getElementById('hoursSlider');
+            if (parseInt(slider.value, 10) !== currentHours) {
+                slider.value = currentHours;
+            }
+
+            // --- 1. SUB-RANK COMPARATIVE PROGRESS METER ---
+            const subRankHoursIn = currentHours - subRank.startHour;
+            const subRankSpan = subRank.endHour - subRank.startHour;
+            const subRankRawPct = currentHours >= 10000 ? 100 : Math.min(100, Math.max(0, (subRankHoursIn / subRankSpan) * 100));
+            const nextSubRankObj = ALL_SUB_RANKS[Math.min(ALL_SUB_RANKS.length - 1, subRank.globalIndex)];
+
+            document.getElementById('meterSubRankTitle').textContent = currentHours >= 10000 ? 'Legend S+ Cap' : `To ${nextSubRankObj.fullTitle}`;
+            document.getElementById('meterSubRankPct').textContent = formatTruncatedPct(subRankRawPct);
+            document.getElementById('meterSubRankBar').style.width = `${subRankRawPct.toFixed(4)}%`;
+            document.getElementById('meterSubRankBar').style.backgroundColor = league.barColor; // Uses high-visibility bar color
+            document.getElementById('meterSubRankCurrent').textContent = `${currentHours.toLocaleString()} hrs`;
+            document.getElementById('meterSubRankTarget').textContent = `Target: ${subRank.endHour.toLocaleString()} hrs`;
+            document.getElementById('meterSubRankRemaining').textContent = `${Math.max(0, subRank.endHour - currentHours).toLocaleString()} hrs remaining to advance`;
+
+            // --- 2. INTRA-LEAGUE RELATIVE COMPARATIVE PROGRESS METER ---
+            const nextLeagueObj = LEAGUES.find(l => l.id === league.id + 1) || LEAGUES[LEAGUES.length - 1];
+            const leagueHoursIn = currentHours - league.startHour;
+            const leagueSpan = league.endHour - league.startHour;
+            const leagueRawPct = currentHours >= 10000 ? 100 : Math.min(100, Math.max(0, (leagueHoursIn / leagueSpan) * 100));
+
+            document.getElementById('meterLeagueTitle').textContent = currentHours >= 10000 ? 'All Leagues Complete' : `To ${nextLeagueObj.name} League`;
+            document.getElementById('meterLeaguePct').textContent = formatTruncatedPct(leagueRawPct);
+            document.getElementById('meterLeagueBar').style.width = `${leagueRawPct.toFixed(4)}%`;
+            document.getElementById('meterLeagueCurrent').textContent = `${currentHours.toLocaleString()} hrs`;
+            document.getElementById('meterLeagueTarget').textContent = `Target: ${league.endHour.toLocaleString()} hrs`;
+            document.getElementById('meterLeagueRemaining').textContent = `${Math.max(0, league.endHour - currentHours).toLocaleString()} hrs remaining to ${nextLeagueObj.name}`;
+
+            // --- 3. GRAND 10,000h JOURNEY CAP METER ---
+            const grandRawPct = (currentHours / 10000) * 100;
+            document.getElementById('meterGrandPct').textContent = formatTruncatedPct(grandRawPct);
+            document.getElementById('meterGrandBar').style.width = `${grandRawPct.toFixed(4)}%`;
+            document.getElementById('meterGrandCurrent').textContent = `${currentHours.toLocaleString()} hrs`;
+            document.getElementById('meterGrandRemaining').textContent = `${Math.max(0, 10000 - currentHours).toLocaleString()} hours remaining to 10k`;
+
+            // Refresh Active Tab Views
+            if (activeTab === 'hierarchy') renderHierarchy(document.getElementById('leagueFilterSelect').value);
+            if (activeTab === 'projections') renderProjections();
+        }
+
+        /* ==========================================================================
+           6. CONTROLS & HOUR ADJUSTMENTS
+           ========================================================================== */
+
+        function setHours(val) {
+            currentHours = Math.max(0, Math.min(10000, parseInt(val, 10) || 0));
+            updateUI();
+        }
+
+        function adjustHours(delta) {
+            setHours(currentHours + delta);
+        }
+
+        function promptCustomHours() {
+            const input = prompt("Enter your exact total meditation hours completed (0 - 10,000):", currentHours);
+            if (input !== null) {
+                const parsed = parseInt(input, 10);
+                if (!isNaN(parsed)) setHours(parsed);
+            }
+        }
+
+        document.getElementById('hoursSlider').addEventListener('input', (e) => {
+            setHours(e.target.value);
+        });
+
+        /* ==========================================================================
+           7. TAB 2: 162 SUB-RANK LADDER VIEW
+           ========================================================================== */
+
+        function renderHierarchy(filter = "ALL") {
+            const container = document.getElementById('hierarchyContainer');
+            container.innerHTML = '';
+
+            const filteredLeagues = filter === "ALL" ? LEAGUES : LEAGUES.filter(l => l.name === filter);
+
+            filteredLeagues.forEach(league => {
+                const leagueSubRanks = ALL_SUB_RANKS.filter(sr => sr.leagueName === league.name);
+                const isCurrentLeague = currentHours >= league.startHour && currentHours < league.endHour;
+
+                const card = document.createElement('div');
+                card.className = `glass-panel rounded-2xl overflow-hidden border transition ${isCurrentLeague ? 'border-amber-500/60 shadow-lg shadow-amber-500/10' : 'border-slate-800'}`;
+
+                let html = `
+                    <div class="p-3.5 bg-slate-900 flex items-center justify-between border-b border-slate-800">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-slate-950 border border-slate-800">
+                                ${getLeagueSVG(league.name, 22)}
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-xs text-white">${league.name} League</h3>
+                                <p class="text-[10px] text-slate-400 font-mono">${league.startHour.toLocaleString()}h — ${league.endHour.toLocaleString()}h</p>
+                            </div>
+                        </div>
+                        <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-slate-800 text-slate-300">
+                            18 Sub-Ranks
+                        </span>
+                    </div>
+                    <div class="p-2.5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 bg-slate-950/40">
+                `;
+
+                leagueSubRanks.forEach(sr => {
+                    const isPassed = currentHours >= sr.endHour;
+                    const isCurrent = currentHours >= sr.startHour && currentHours < sr.endHour;
+
+                    let bgStyle = "bg-slate-900/60 border-slate-800 text-slate-500";
+                    if (isPassed) bgStyle = "bg-slate-800/80 border-slate-700 text-slate-300";
+                    if (isCurrent) bgStyle = "bg-amber-950/80 border-amber-500 text-amber-300 ring-1 ring-amber-500/50";
+
+                    html += `
+                        <div class="p-2 rounded-xl border text-center transition ${bgStyle}">
+                            <div class="text-xs font-bold font-mono">${sr.stepCode}</div>
+                            <div class="text-[9px] opacity-75 font-mono mt-0.5">${sr.startHour}-${sr.endHour}h</div>
+                        </div>
+                    `;
+                });
+
+                html += `</div>`;
+                card.innerHTML = html;
+                container.appendChild(card);
+            });
+        }
+
+        /* ==========================================================================
+           8. TAB 3: TIME PROJECTIONS & ESTIMATES (UP TO 24 HRS/DAY)
+           ========================================================================== */
+
+        function setPace(val) {
+            plannedPace = Math.max(0.1, Math.min(24, parseFloat(val) || 1.5));
+            document.getElementById('customPaceInput').value = plannedPace;
+
+            document.querySelectorAll('.pace-btn').forEach(btn => {
+                btn.classList.remove('border-amber-500/50', 'bg-amber-950/40', 'text-amber-300', 'font-bold');
+                btn.classList.add('border-slate-800', 'bg-slate-950', 'text-slate-300');
+            });
+            const activeBtn = document.getElementById(`pace-${plannedPace}`);
+            if (activeBtn) {
+                activeBtn.classList.add('border-amber-500/50', 'bg-amber-950/40', 'text-amber-300', 'font-bold');
+            }
+
+            renderProjections();
+        }
+
+        function onCustomPaceChange(val) {
+            const parsed = parseFloat(val);
+            if (!isNaN(parsed) && parsed > 0) {
+                plannedPace = Math.min(24, parsed);
+                renderProjections();
+            }
+        }
+
+        function renderProjections() {
+            const today = new Date();
+
+            // 1. Render League Projections
+            const leagueBody = document.getElementById('leagueProjectionsBody');
+            leagueBody.innerHTML = '';
+
+            LEAGUES.forEach(league => {
+                const remaining = Math.max(0, league.endHour - currentHours);
+                const daysNeeded = Math.ceil(remaining / plannedPace);
+
+                const targetDate = new Date(today);
+                targetDate.setDate(targetDate.getDate() + daysNeeded);
+
+                const formattedDate = remaining === 0 
+                    ? '<span class="text-emerald-400 font-bold">ACHIEVED</span>' 
+                    : targetDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-900/60 transition";
+                tr.innerHTML = `
+                    <td class="py-2.5 px-3 font-semibold flex items-center space-x-2">
+                        <span class="w-2 h-2 rounded-full" style="background-color: ${league.color}"></span>
+                        <span class="text-slate-200">${league.name}</span>
+                    </td>
+                    <td class="py-2.5 px-3 text-slate-400">${league.endHour.toLocaleString()}h</td>
+                    <td class="py-2.5 px-3 text-amber-300 font-bold">${remaining.toLocaleString()}h</td>
+                    <td class="py-2.5 px-3 text-slate-400">${daysNeeded.toLocaleString()}d</td>
+                    <td class="py-2.5 px-3 text-right text-sky-400">${formattedDate}</td>
+                `;
+                leagueBody.appendChild(tr);
+            });
+
+            // 2. Render Sub-Rank Projections (Next 18 Upcoming Steps)
+            const subRankBody = document.getElementById('subRankProjectionsBody');
+            subRankBody.innerHTML = '';
+
+            const upcomingSubRanks = ALL_SUB_RANKS.filter(sr => sr.endHour > currentHours).slice(0, 18);
+
+            upcomingSubRanks.forEach(sr => {
+                const remaining = Math.max(0, sr.endHour - currentHours);
+                const daysNeeded = Math.ceil(remaining / plannedPace);
+
+                const targetDate = new Date(today);
+                targetDate.setDate(targetDate.getDate() + daysNeeded);
+
+                const formattedDate = remaining === 0 
+                    ? '<span class="text-emerald-400 font-bold">ACHIEVED</span>' 
+                    : targetDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-900/60 transition";
+                tr.innerHTML = `
+                    <td class="py-2.5 px-3 font-semibold text-slate-200">${sr.fullTitle}</td>
+                    <td class="py-2.5 px-3 text-slate-400">${sr.endHour.toLocaleString()}h</td>
+                    <td class="py-2.5 px-3 text-amber-300 font-bold">${remaining.toLocaleString()}h</td>
+                    <td class="py-2.5 px-3 text-slate-400">${daysNeeded.toLocaleString()}d</td>
+                    <td class="py-2.5 px-3 text-right text-sky-400">${formattedDate}</td>
+                `;
+                subRankBody.appendChild(tr);
+            });
+        }
+
+        /* ==========================================================================
+           9. NAVIGATION TAB SWITCHER
+           ========================================================================== */
+
+        function switchTab(tabName) {
+            activeTab = tabName;
+
+            // Hide all tabs
+            document.querySelectorAll('.tab-page').forEach(page => page.classList.add('hidden'));
+
+            // Show selected tab
+            const target = document.getElementById(`page-${tabName}`);
+            if (target) target.classList.remove('hidden');
+
+            // Reset Bottom Nav Buttons
+            document.querySelectorAll('nav button').forEach(btn => {
+                btn.classList.remove('text-amber-400');
+                btn.classList.add('text-slate-400');
+            });
+            const activeNavBtn = document.getElementById(`tab-btn-${tabName}`);
+            if (activeNavBtn) {
+                activeNavBtn.classList.add('text-amber-400');
+                activeNavBtn.classList.remove('text-slate-400');
+            }
+
+            // Render view-specific content
+            if (tabName === 'hierarchy') renderHierarchy(document.getElementById('leagueFilterSelect').value);
+            if (tabName === 'projections') renderProjections();
+        }
+
+        /* Initial boot */
+        window.onload = function() {
+            updateUI();
+            setPace(1.5);
+        };
+    </script>
 </body>
 </html>
