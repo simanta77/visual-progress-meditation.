@@ -105,7 +105,7 @@
                     <h1 class="font-bold text-base tracking-tight bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-500 bg-clip-text text-transparent">
                         10,000 meditation goal
                     </h1>
-                    <p class="text-[10px] text-slate-400 font-medium tracking-wide uppercase">iPhone 15 Pro Max Edition</p>
+                    <p class="text-[10px] text-slate-400 font-medium tracking-wide uppercase">9 Leagues • Rank 200 to 1 per League</p>
                 </div>
             </div>
 
@@ -139,11 +139,11 @@
                                     IRON LEAGUE
                                 </span>
                                 <span id="heroSubRankStepTag" class="text-[11px] font-mono font-bold text-slate-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">
-                                    STEP 1 / 162
+                                    RANK 200 / 200
                                 </span>
                             </div>
                             <h2 id="heroSubRankTitle" class="text-3xl font-black tracking-tight mt-1 text-white">
-                                Iron E-
+                                Iron Rank 200
                             </h2>
                             <p id="heroSubRankDesc" class="text-xs text-slate-400 mt-1 max-w-md italic">
                                 "Laying the foundations of mental stillness."
@@ -177,11 +177,11 @@
                     <input type="range" id="hoursSlider" min="0" max="10000" value="0" step="1" 
                         class="w-full h-3 bg-slate-900 rounded-lg appearance-none cursor-pointer border border-slate-800">
                     <div class="flex justify-between text-[10px] text-slate-500 font-mono font-bold">
-                        <span>0h (Iron)</span>
+                        <span>0h (Iron 200)</span>
                         <span>2,500h</span>
                         <span>5,000h</span>
                         <span>7,500h</span>
-                        <span>10,000h (Legend S+)</span>
+                        <span>10,000h (Legend 1)</span>
                     </div>
                 </div>
 
@@ -211,8 +211,8 @@
                     <div class="glass-panel p-4 rounded-2xl border border-slate-800 space-y-3">
                         <div class="flex justify-between items-center">
                             <div>
-                                <div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">SUB-RANK STEP</div>
-                                <div id="meterSubRankTitle" class="text-xs font-black text-white mt-0.5">To Iron E</div>
+                                <div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">RANK PROGRESS</div>
+                                <div id="meterSubRankTitle" class="text-xs font-black text-white mt-0.5">To Iron Rank 199</div>
                             </div>
                             <span id="meterSubRankPct" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
                                 0.0%
@@ -223,10 +223,10 @@
                         </div>
                         <div class="flex justify-between text-[10px] font-mono text-slate-400">
                             <span id="meterSubRankCurrent">0 hrs</span>
-                            <span id="meterSubRankTarget">Target: 62 hrs</span>
+                            <span id="meterSubRankTarget">Target: 6 hrs</span>
                         </div>
                         <div id="meterSubRankRemaining" class="text-[10px] text-slate-500 font-mono italic">
-                            62 hrs remaining to advance
+                            6 hrs remaining to advance
                         </div>
                     </div>
 
@@ -258,7 +258,7 @@
                         <div class="flex justify-between items-center">
                             <div>
                                 <div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">GRAND JOURNEY</div>
-                                <div class="text-xs font-black text-white mt-0.5">10,000h Legend S+</div>
+                                <div class="text-xs font-black text-white mt-0.5">10,000h Legend Rank 1</div>
                             </div>
                             <span id="meterGrandPct" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-pink-500/20 text-pink-300 border border-pink-500/30">
                                 0.0%
@@ -272,29 +272,29 @@
                             <span>Cap: 10,000 hrs</span>
                         </div>
                         <div id="meterGrandRemaining" class="text-[10px] text-slate-500 font-mono italic">
-                            10,000 hours remaining to 10k
+                            10,000 hours remaining to Legend Rank 1
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ================= TAB 2: 162 LADDER ================= -->
+        <!-- ================= TAB 2: 200 LADDER ================= -->
         <section id="page-hierarchy" class="tab-page hidden space-y-6">
             <div class="glass-panel rounded-3xl p-5 space-y-5 border border-slate-800">
                 <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 border-b border-slate-800 pb-4">
                     <div>
                         <h2 class="text-lg font-extrabold text-white flex items-center space-x-2">
                             <i class="fa-solid fa-layer-group text-amber-400"></i>
-                            <span>162 Sub-Rank Ladder</span>
+                            <span>200 Rank Ascension Ladder</span>
                         </h2>
-                        <p class="text-xs text-slate-400 mt-0.5">All 9 Major Leagues & 18 Sub-Ranks with clean whole-hour bounds.</p>
+                        <p class="text-xs text-slate-400 mt-0.5">9 Major Leagues • Ranks 200 to 1 per League (~5.55h per rank).</p>
                     </div>
 
                     <!-- Filter Dropdown -->
                     <select id="leagueFilterSelect" onchange="renderHierarchy(this.value)" 
                         class="bg-slate-900 border border-slate-700 text-xs rounded-xl px-3 py-2 text-slate-200 font-semibold focus:outline-none focus:border-amber-500">
-                        <option value="ALL">All Leagues (9 Leagues / 162 Ranks)</option>
+                        <option value="ALL">All Leagues (9 Leagues / 200 Ranks Each)</option>
                         <option value="Iron">1. Iron League (0 - 1,111h)</option>
                         <option value="Bronze">2. Bronze League (1,111 - 2,222h)</option>
                         <option value="Silver">3. Silver League (2,222 - 3,333h)</option>
@@ -322,7 +322,7 @@
                         <i class="fa-solid fa-calculator text-amber-400"></i>
                         <span>Time Projections & Estimates</span>
                     </h2>
-                    <p class="text-xs text-slate-400 mt-0.5">Calculate completion dates for all sub-ranks and major leagues (up to 24 hrs/day).</p>
+                    <p class="text-xs text-slate-400 mt-0.5">Calculate completion dates for all numerical ranks and major leagues (up to 24 hrs/day).</p>
                 </div>
 
                 <!-- Rate Input Controls -->
@@ -370,12 +370,12 @@
 
                 <!-- Sub-Rank Step Roadmap Table -->
                 <div class="space-y-2">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Upcoming Sub-Rank Steps (Next 18 Steps)</h3>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Upcoming Rank Milestones (Next 20 Ranks)</h3>
                     <div class="overflow-x-auto rounded-2xl border border-slate-800 max-h-72">
                         <table class="w-full text-left border-collapse text-xs">
                             <thead>
                                 <tr class="bg-slate-900 text-slate-400 uppercase font-semibold border-b border-slate-800 text-[10px] sticky top-0 z-10">
-                                    <th class="py-2.5 px-3">Sub-Rank</th>
+                                    <th class="py-2.5 px-3">Rank Milestone</th>
                                     <th class="py-2.5 px-3">Boundary</th>
                                     <th class="py-2.5 px-3">Hours Left</th>
                                     <th class="py-2.5 px-3">Days Left</th>
@@ -393,7 +393,7 @@
 
     </main>
 
-    <!-- FIXED BOTTOM THUMB NAVIGATION BAR (STRICTLY 3 TABS FOR IPHONE 15 PRO MAX) -->
+    <!-- FIXED BOTTOM THUMB NAVIGATION BAR -->
     <nav class="fixed bottom-0 left-0 right-0 glass-panel border-t border-slate-800/90 z-50 px-3 py-2 safe-pb">
         <div class="max-w-md mx-auto grid grid-cols-3 gap-1 text-center">
             <button onclick="switchTab('tracker')" id="tab-btn-tracker" class="py-1.5 rounded-xl flex flex-col items-center justify-center text-amber-400 transition">
@@ -402,7 +402,7 @@
             </button>
             <button onclick="switchTab('hierarchy')" id="tab-btn-hierarchy" class="py-1.5 rounded-xl flex flex-col items-center justify-center text-slate-400 transition">
                 <i class="fa-solid fa-layer-group text-base"></i>
-                <span class="text-[10px] font-bold mt-0.5">162 Ladder</span>
+                <span class="text-[10px] font-bold mt-0.5">200 Ladder</span>
             </button>
             <button onclick="switchTab('projections')" id="tab-btn-projections" class="py-1.5 rounded-xl flex flex-col items-center justify-center text-slate-400 transition">
                 <i class="fa-solid fa-calculator text-base"></i>
@@ -414,12 +414,12 @@
     <!-- JAVASCRIPT APPLICATION LOGIC -->
     <script>
         /* ==========================================================================
-           1. STRICT 9 LEAGUES & 162 SUB-RANKS MATH DATA ARCHITECTURE
+           1. STRICT 9 LEAGUES & 200 NUMERICAL RANKS PER LEAGUE MATH ARCHITECTURE
            ========================================================================== */
 
-        const SUB_RANK_STEPS = ["E-", "E", "E+", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+", "S-", "S", "S+"];
+        const RANKS_PER_LEAGUE = 200;
 
-        // Exact 9 Leagues in ascending sequence with high-contrast progress bar colors (barColor)
+        // Exact 9 Leagues sequence kept identical with 10,000h milestones
         const LEAGUES = [
             { id: 1, name: "Iron", color: "#d6ffda", barColor: "#d6ffda", startHour: 0, endHour: 1111, quote: "Grounding posture and breath stability." },
             { id: 2, name: "Bronze", color: "#d97706", barColor: "#fbbf24", startHour: 1111, endHour: 2222, quote: "Spark of stillness, reducing mental wander." },
@@ -432,31 +432,34 @@
             { id: 9, name: "Legend", color: "#ec4899", barColor: "#f472b6", startHour: 8889, endHour: 10000, quote: "Unshakable non-dual mastery." }
         ];
 
-        // Generate all 162 sub-ranks cleanly mapped across 10,000 hours
+        // Generate all sub-ranks: Each league has ranks 200 (lowest) down to 1 (highest)
         const ALL_SUB_RANKS = [];
-        let globalIndex = 1;
+        let globalIndexCounter = 1;
 
-        LEAGUES.forEach(league => {
+        LEAGUES.forEach((league) => {
             const leagueSpan = league.endHour - league.startHour;
-            const stepSpan = leagueSpan / 18;
+            const hoursPerRank = leagueSpan / RANKS_PER_LEAGUE;
 
-            SUB_RANK_STEPS.forEach((step, idx) => {
-                const subStart = Math.round(league.startHour + (idx * stepSpan));
-                const subEnd = idx === 17 ? league.endHour : Math.round(league.startHour + ((idx + 1) * stepSpan));
+            for (let r = 200; r >= 1; r--) {
+                const rankIndexInLeague = 200 - r; // 0 for Rank 200, 199 for Rank 1
+                const subStart = Math.round(league.startHour + (rankIndexInLeague * hoursPerRank));
+                const subEnd = (r === 1) ? league.endHour : Math.round(league.startHour + ((rankIndexInLeague + 1) * hoursPerRank));
 
                 ALL_SUB_RANKS.push({
-                    globalIndex: globalIndex++,
+                    rankNumber: r,
+                    globalIndex: globalIndexCounter++,
+                    leagueId: league.id,
                     leagueName: league.name,
                     leagueColor: league.color,
                     leagueBarColor: league.barColor,
-                    stepCode: step,
-                    fullTitle: `${league.name} ${step}`,
+                    stepCode: `${league.name} Rank ${r}`,
+                    fullTitle: `${league.name} Rank ${r}`,
                     startHour: subStart,
                     endHour: subEnd,
                     requiredHours: subEnd - subStart,
                     quote: league.quote
                 });
-            });
+            }
         });
 
         /* ==========================================================================
@@ -499,7 +502,7 @@
 
         function getSubRank(hours) {
             const h = Math.max(0, Math.min(10000, hours));
-            if (h >= 10000) return ALL_SUB_RANKS[ALL_SUB_RANKS.length - 1];
+            if (h >= 10000) return ALL_SUB_RANKS[ALL_SUB_RANKS.length - 1]; // Legend Rank 1
             return ALL_SUB_RANKS.find(sr => h >= sr.startHour && h < sr.endHour) || ALL_SUB_RANKS[0];
         }
 
@@ -538,7 +541,7 @@
             document.getElementById('heroEmblemContainer').innerHTML = getLeagueSVG(league.name, 60);
             document.getElementById('heroLeagueBadge').textContent = `${league.name.toUpperCase()} LEAGUE`;
             document.getElementById('heroLeagueBadge').style.color = league.color;
-            document.getElementById('heroSubRankStepTag').textContent = `STEP ${subRank.globalIndex} / 162`;
+            document.getElementById('heroSubRankStepTag').textContent = `RANK ${subRank.rankNumber} / 200`;
             document.getElementById('heroSubRankTitle').textContent = subRank.fullTitle;
             document.getElementById('heroSubRankDesc').textContent = `"${subRank.quote}"`;
             document.getElementById('heroCurrentHours').textContent = currentHours.toLocaleString();
@@ -552,14 +555,14 @@
 
             // --- 1. SUB-RANK COMPARATIVE PROGRESS METER ---
             const subRankHoursIn = currentHours - subRank.startHour;
-            const subRankSpan = subRank.endHour - subRank.startHour;
+            const subRankSpan = Math.max(1, subRank.endHour - subRank.startHour);
             const subRankRawPct = currentHours >= 10000 ? 100 : Math.min(100, Math.max(0, (subRankHoursIn / subRankSpan) * 100));
-            const nextSubRankObj = ALL_SUB_RANKS[Math.min(ALL_SUB_RANKS.length - 1, subRank.globalIndex)];
+            const nextSubRankObj = ALL_SUB_RANKS.find(sr => sr.globalIndex === subRank.globalIndex + 1) || ALL_SUB_RANKS[ALL_SUB_RANKS.length - 1];
 
-            document.getElementById('meterSubRankTitle').textContent = currentHours >= 10000 ? 'Legend S+ Cap' : `To ${nextSubRankObj.fullTitle}`;
+            document.getElementById('meterSubRankTitle').textContent = currentHours >= 10000 ? 'Legend Rank 1 Complete' : `To ${nextSubRankObj.fullTitle}`;
             document.getElementById('meterSubRankPct').textContent = formatTruncatedPct(subRankRawPct);
             document.getElementById('meterSubRankBar').style.width = `${subRankRawPct.toFixed(4)}%`;
-            document.getElementById('meterSubRankBar').style.backgroundColor = league.barColor; // Uses high-visibility bar color
+            document.getElementById('meterSubRankBar').style.backgroundColor = league.barColor;
             document.getElementById('meterSubRankCurrent').textContent = `${currentHours.toLocaleString()} hrs`;
             document.getElementById('meterSubRankTarget').textContent = `Target: ${subRank.endHour.toLocaleString()} hrs`;
             document.getElementById('meterSubRankRemaining').textContent = `${Math.max(0, subRank.endHour - currentHours).toLocaleString()} hrs remaining to advance`;
@@ -582,7 +585,7 @@
             document.getElementById('meterGrandPct').textContent = formatTruncatedPct(grandRawPct);
             document.getElementById('meterGrandBar').style.width = `${grandRawPct.toFixed(4)}%`;
             document.getElementById('meterGrandCurrent').textContent = `${currentHours.toLocaleString()} hrs`;
-            document.getElementById('meterGrandRemaining').textContent = `${Math.max(0, 10000 - currentHours).toLocaleString()} hours remaining to 10k`;
+            document.getElementById('meterGrandRemaining').textContent = `${Math.max(0, 10000 - currentHours).toLocaleString()} hours remaining to Legend Rank 1`;
 
             // Refresh Active Tab Views
             if (activeTab === 'hierarchy') renderHierarchy(document.getElementById('leagueFilterSelect').value);
@@ -615,7 +618,7 @@
         });
 
         /* ==========================================================================
-           7. TAB 2: 162 SUB-RANK LADDER VIEW
+           7. TAB 2: 200 NUMERICAL RANK LADDER VIEW PER LEAGUE
            ========================================================================== */
 
         function renderHierarchy(filter = "ALL") {
@@ -643,10 +646,10 @@
                             </div>
                         </div>
                         <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-slate-800 text-slate-300">
-                            18 Sub-Ranks
+                            200 Ranks (Rank 200 to 1)
                         </span>
                     </div>
-                    <div class="p-2.5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 bg-slate-950/40">
+                    <div class="p-2.5 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2 bg-slate-950/40 max-h-64 overflow-y-auto">
                 `;
 
                 leagueSubRanks.forEach(sr => {
@@ -659,7 +662,7 @@
 
                     html += `
                         <div class="p-2 rounded-xl border text-center transition ${bgStyle}">
-                            <div class="text-xs font-bold font-mono">${sr.stepCode}</div>
+                            <div class="text-xs font-bold font-mono">Rank ${sr.rankNumber}</div>
                             <div class="text-[9px] opacity-75 font-mono mt-0.5">${sr.startHour}-${sr.endHour}h</div>
                         </div>
                     `;
@@ -672,7 +675,7 @@
         }
 
         /* ==========================================================================
-           8. TAB 3: TIME PROJECTIONS & ESTIMATES (UP TO 24 HRS/DAY)
+           8. TAB 3: TIME PROJECTIONS & ESTIMATES
            ========================================================================== */
 
         function setPace(val) {
@@ -732,11 +735,11 @@
                 leagueBody.appendChild(tr);
             });
 
-            // 2. Render Sub-Rank Projections (Next 18 Upcoming Steps)
+            // 2. Render Sub-Rank Projections (Next 20 Upcoming Numerical Steps)
             const subRankBody = document.getElementById('subRankProjectionsBody');
             subRankBody.innerHTML = '';
 
-            const upcomingSubRanks = ALL_SUB_RANKS.filter(sr => sr.endHour > currentHours).slice(0, 18);
+            const upcomingSubRanks = ALL_SUB_RANKS.filter(sr => sr.endHour > currentHours).slice(0, 20);
 
             upcomingSubRanks.forEach(sr => {
                 const remaining = Math.max(0, sr.endHour - currentHours);
