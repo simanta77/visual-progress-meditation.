@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>10,000 meditation goal</title>
+    <title>120-Day Dopamine Detox Goal</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -45,7 +45,6 @@
             border-radius: 4px;
         }
 
-        /* Prevent rubber-banding on iOS while keeping smooth touch scrolling */
         body {
             overscroll-behavior-y: none;
             -webkit-tap-highlight-color: transparent;
@@ -60,28 +59,7 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        /* Touch-friendly slider thumb */
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            height: 26px;
-            width: 26px;
-            border-radius: 50%;
-            background: #eab308;
-            cursor: pointer;
-            box-shadow: 0 0 14px rgba(234, 179, 8, 0.7);
-            border: 2px solid #ffffff;
-        }
-        input[type=range]::-moz-range-thumb {
-            height: 26px;
-            width: 26px;
-            border-radius: 50%;
-            background: #eab308;
-            cursor: pointer;
-            box-shadow: 0 0 14px rgba(234, 179, 8, 0.7);
-            border: 2px solid #ffffff;
-        }
-
-        /* Micro-responsive fluid progress bar transition */
+        /* Fluid progress bar transition */
         .progress-fill {
             transition: width 0.15s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: width;
@@ -103,17 +81,17 @@
                 </div>
                 <div>
                     <h1 class="font-bold text-base tracking-tight bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-500 bg-clip-text text-transparent">
-                        10,000 meditation goal
+                        120-Day Dopamine Detox Goal
                     </h1>
-                    <p class="text-[10px] text-slate-400 font-medium tracking-wide uppercase">9 Leagues • Rank 200 to 1 per League</p>
+                    <p class="text-[10px] text-slate-400 font-medium tracking-wide uppercase">Fixed Timeline Progression</p>
                 </div>
             </div>
 
-            <!-- Header Quick Hours Badge -->
-            <button onclick="promptCustomHours()" class="flex items-center space-x-2 bg-slate-900/90 border border-amber-500/30 px-3 py-1.5 rounded-full hover:border-amber-400 transition active:scale-95">
-                <i class="fa-solid fa-pen-to-square text-amber-400 text-xs"></i>
-                <span id="headerHoursBadge" class="text-xs font-mono font-bold text-amber-300">0 / 10,000 hrs</span>
-            </button>
+            <!-- Header Quick Days Badge -->
+            <div class="flex items-center space-x-2 bg-slate-900/90 border border-amber-500/30 px-3 py-1.5 rounded-full">
+                <i class="fa-solid fa-hourglass-half text-amber-400 text-xs"></i>
+                <span id="headerHoursBadge" class="text-xs font-mono font-bold text-amber-300">Day 0.00 / 120</span>
+            </div>
         </div>
     </header>
 
@@ -139,60 +117,61 @@
                                     IRON LEAGUE
                                 </span>
                                 <span id="heroSubRankStepTag" class="text-[11px] font-mono font-bold text-slate-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">
-                                    RANK 200 / 200
+                                    STEP 1 / 162
                                 </span>
                             </div>
-                            <h2 id="heroSubRankTitle" class="text-3xl font-black tracking-tight mt-1 text-white">
-                                Iron Rank 200
+                            <div class="text-xs uppercase font-extrabold tracking-wider text-amber-400/90 mt-2">YOUR RANK IS:</div>
+                            <h2 id="heroSubRankTitle" class="text-3xl font-black tracking-tight mt-0.5 text-white">
+                                Iron E-
                             </h2>
                             <p id="heroSubRankDesc" class="text-xs text-slate-400 mt-1 max-w-md italic">
-                                "Laying the foundations of mental stillness."
+                                "Severing cheap dopamine and reclaiming baseline focus."
                             </p>
                         </div>
                     </div>
 
-                    <!-- Right Total Hours Banner -->
+                    <!-- Right Total Days Banner -->
                     <div class="text-center md:text-right bg-slate-900/80 border border-slate-800/80 px-5 py-3.5 rounded-2xl w-full md:w-auto">
-                        <div class="text-[11px] text-slate-400 font-semibold uppercase tracking-wider">Total Meditation Completed</div>
+                        <div class="text-[11px] text-slate-400 font-semibold uppercase tracking-wider">Detox Time Elapsed</div>
                         <div class="flex items-baseline justify-center md:justify-end space-x-1.5 mt-0.5">
-                            <span id="heroCurrentHours" class="text-3xl sm:text-4xl font-black font-mono tracking-tight text-amber-400">0</span>
-                            <span class="text-sm font-bold text-slate-500">/ 10,000 hrs</span>
+                            <span id="heroCurrentHours" class="text-3xl sm:text-4xl font-black font-mono tracking-tight text-amber-400">0.00</span>
+                            <span class="text-sm font-bold text-slate-500">/ 120 Days</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- TOTAL HOURS CONTROL CARD -->
+            <!-- LIVE TIMER CARD -->
             <div class="glass-panel rounded-3xl p-5 space-y-5 border border-slate-800">
                 <div class="flex items-center justify-between">
                     <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center space-x-2">
-                        <i class="fa-solid fa-sliders text-amber-400"></i>
-                        <span>Direct Hour Entry & Adjustments</span>
+                        <i class="fa-solid fa-clock text-amber-400"></i>
+                        <span>Live Real-Time Detox Counter</span>
                     </h3>
-                    <span class="text-[11px] text-slate-400 font-mono">Strict Whole Hours</span>
+                    <span class="text-[11px] text-emerald-400 font-mono font-bold flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        LIVE
+                    </span>
                 </div>
 
-                <!-- Range Slider -->
-                <div class="space-y-2">
-                    <input type="range" id="hoursSlider" min="0" max="10000" value="0" step="1" 
-                        class="w-full h-3 bg-slate-900 rounded-lg appearance-none cursor-pointer border border-slate-800">
-                    <div class="flex justify-between text-[10px] text-slate-500 font-mono font-bold">
-                        <span>0h (Iron 200)</span>
-                        <span>2,500h</span>
-                        <span>5,000h</span>
-                        <span>7,500h</span>
-                        <span>10,000h (Legend 1)</span>
+                <!-- Live Clock Grid -->
+                <div class="grid grid-cols-4 gap-2 text-center font-mono">
+                    <div class="bg-slate-900/90 p-3 rounded-2xl border border-amber-500/30">
+                        <div class="text-2xl font-black text-amber-400" id="live-days">00</div>
+                        <div class="text-[9px] font-bold text-slate-400 uppercase mt-0.5">Days</div>
                     </div>
-                </div>
-
-                <!-- Quick Adjuster Buttons -->
-                <div class="grid grid-cols-3 sm:grid-cols-6 gap-2">
-                    <button onclick="adjustHours(-1)" class="py-3 rounded-xl bg-slate-900 hover:bg-slate-800 active:bg-slate-700 text-rose-300 text-xs font-mono font-extrabold border border-rose-900/40 transition active:scale-95 shadow">-1h</button>
-                    <button onclick="adjustHours(1)" class="py-3 rounded-xl bg-slate-900 hover:bg-slate-800 active:bg-slate-700 text-amber-300 text-xs font-mono font-extrabold border border-amber-500/30 transition active:scale-95 shadow">+1h</button>
-                    <button onclick="adjustHours(5)" class="py-3 rounded-xl bg-slate-900 hover:bg-slate-800 active:bg-slate-700 text-amber-300 text-xs font-mono font-extrabold border border-amber-500/30 transition active:scale-95 shadow">+5h</button>
-                    <button onclick="adjustHours(25)" class="py-3 rounded-xl bg-slate-900 hover:bg-slate-800 active:bg-slate-700 text-amber-300 text-xs font-mono font-extrabold border border-amber-500/30 transition active:scale-95 shadow">+25h</button>
-                    <button onclick="adjustHours(100)" class="py-3 rounded-xl bg-slate-900 hover:bg-slate-800 active:bg-slate-700 text-amber-300 text-xs font-mono font-extrabold border border-amber-500/30 transition active:scale-95 shadow">+100h</button>
-                    <button onclick="adjustHours(500)" class="py-3 rounded-xl bg-slate-900 hover:bg-slate-800 active:bg-slate-700 text-amber-300 text-xs font-mono font-extrabold border border-amber-500/30 transition active:scale-95 shadow">+500h</button>
+                    <div class="bg-slate-900/90 p-3 rounded-2xl border border-slate-800">
+                        <div class="text-2xl font-black text-white" id="live-hours">00</div>
+                        <div class="text-[9px] font-bold text-slate-400 uppercase mt-0.5">Hours</div>
+                    </div>
+                    <div class="bg-slate-900/90 p-3 rounded-2xl border border-slate-800">
+                        <div class="text-2xl font-black text-white" id="live-mins">00</div>
+                        <div class="text-[9px] font-bold text-slate-400 uppercase mt-0.5">Mins</div>
+                    </div>
+                    <div class="bg-slate-900/90 p-3 rounded-2xl border border-amber-500/30">
+                        <div class="text-2xl font-black text-amber-400" id="live-secs">00</div>
+                        <div class="text-[9px] font-bold text-slate-400 uppercase mt-0.5">Secs</div>
+                    </div>
                 </div>
             </div>
 
@@ -203,16 +182,15 @@
                         <i class="fa-solid fa-chart-simple text-amber-400"></i>
                         <span>Comparative Progress Meters</span>
                     </h3>
-                    <span class="text-[11px] text-slate-400 font-mono">Exact Truncated %</span>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <!-- 1. Next Sub-Rank Progress Meter -->
+                    <!-- 1. Current Sub-Rank Progress Meter -->
                     <div class="glass-panel p-4 rounded-2xl border border-slate-800 space-y-3">
                         <div class="flex justify-between items-center">
                             <div>
-                                <div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">RANK PROGRESS</div>
-                                <div id="meterSubRankTitle" class="text-xs font-black text-white mt-0.5">To Iron Rank 199</div>
+                                <div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">CURRENT RANK</div>
+                                <div id="meterSubRankTitle" class="text-xs font-black text-white mt-0.5">Iron E-</div>
                             </div>
                             <span id="meterSubRankPct" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
                                 0.0%
@@ -222,20 +200,19 @@
                             <div id="meterSubRankBar" class="progress-fill h-full bg-amber-400 rounded-full" style="width: 0%"></div>
                         </div>
                         <div class="flex justify-between text-[10px] font-mono text-slate-400">
-                            <span id="meterSubRankCurrent">0 hrs</span>
-                            <span id="meterSubRankTarget">Target: 6 hrs</span>
+                            <span id="meterSubRankCurrent">Progress Made: 0.0%</span>
                         </div>
                         <div id="meterSubRankRemaining" class="text-[10px] text-slate-500 font-mono italic">
-                            6 hrs remaining to advance
+                            0.7 days remaining in Iron E-
                         </div>
                     </div>
 
-                    <!-- 2. Next Major League Relative Progress Meter -->
+                    <!-- 2. Current Major League Relative Progress Meter -->
                     <div class="glass-panel p-4 rounded-2xl border border-slate-800 space-y-3">
                         <div class="flex justify-between items-center">
                             <div>
-                                <div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">MAJOR LEAGUE</div>
-                                <div id="meterLeagueTitle" class="text-xs font-black text-white mt-0.5">To Bronze League</div>
+                                <div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">CURRENT LEAGUE</div>
+                                <div id="meterLeagueTitle" class="text-xs font-black text-white mt-0.5">Iron League</div>
                             </div>
                             <span id="meterLeaguePct" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
                                 0.0%
@@ -245,20 +222,19 @@
                             <div id="meterLeagueBar" class="progress-fill h-full bg-cyan-400 rounded-full" style="width: 0%"></div>
                         </div>
                         <div class="flex justify-between text-[10px] font-mono text-slate-400">
-                            <span id="meterLeagueCurrent">0 hrs</span>
-                            <span id="meterLeagueTarget">Target: 1,111 hrs</span>
+                            <span id="meterLeagueCurrent">Progress Made: 0.0%</span>
                         </div>
                         <div id="meterLeagueRemaining" class="text-[10px] text-slate-500 font-mono italic">
-                            1,111 hrs remaining to Bronze
+                            13.3 days remaining in Iron League
                         </div>
                     </div>
 
-                    <!-- 3. Grand 10,000h Journey Cap Meter -->
+                    <!-- 3. Grand 120-Day Journey Cap Meter -->
                     <div class="glass-panel p-4 rounded-2xl border border-slate-800 space-y-3">
                         <div class="flex justify-between items-center">
                             <div>
                                 <div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">GRAND JOURNEY</div>
-                                <div class="text-xs font-black text-white mt-0.5">10,000h Legend Rank 1</div>
+                                <div class="text-xs font-black text-white mt-0.5">120-Day Legend S+</div>
                             </div>
                             <span id="meterGrandPct" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-pink-500/20 text-pink-300 border border-pink-500/30">
                                 0.0%
@@ -268,42 +244,42 @@
                             <div id="meterGrandBar" class="progress-fill h-full bg-pink-500 rounded-full" style="width: 0%"></div>
                         </div>
                         <div class="flex justify-between text-[10px] font-mono text-slate-400">
-                            <span id="meterGrandCurrent">0 hrs</span>
-                            <span>Cap: 10,000 hrs</span>
+                            <span id="meterGrandCurrent">Progress Made: 0.0%</span>
+                            <span>Cap: Day 120</span>
                         </div>
                         <div id="meterGrandRemaining" class="text-[10px] text-slate-500 font-mono italic">
-                            10,000 hours remaining to Legend Rank 1
+                            120 days remaining to Legend S+
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ================= TAB 2: 200 LADDER ================= -->
+        <!-- ================= TAB 2: 162 LADDER ================= -->
         <section id="page-hierarchy" class="tab-page hidden space-y-6">
             <div class="glass-panel rounded-3xl p-5 space-y-5 border border-slate-800">
                 <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 border-b border-slate-800 pb-4">
                     <div>
                         <h2 class="text-lg font-extrabold text-white flex items-center space-x-2">
                             <i class="fa-solid fa-layer-group text-amber-400"></i>
-                            <span>200 Rank Ascension Ladder</span>
+                            <span>162 Sub-Rank Ladder</span>
                         </h2>
-                        <p class="text-xs text-slate-400 mt-0.5">9 Major Leagues • Ranks 200 to 1 per League (~5.55h per rank).</p>
+                        <p class="text-xs text-slate-400 mt-0.5">All 9 Major Leagues & 18 Alphabetic Sub-Ranks across 120 Days (~17.7 Hours per Rank).</p>
                     </div>
 
                     <!-- Filter Dropdown -->
                     <select id="leagueFilterSelect" onchange="renderHierarchy(this.value)" 
                         class="bg-slate-900 border border-slate-700 text-xs rounded-xl px-3 py-2 text-slate-200 font-semibold focus:outline-none focus:border-amber-500">
-                        <option value="ALL">All Leagues (9 Leagues / 200 Ranks Each)</option>
-                        <option value="Iron">1. Iron League (0 - 1,111h)</option>
-                        <option value="Bronze">2. Bronze League (1,111 - 2,222h)</option>
-                        <option value="Silver">3. Silver League (2,222 - 3,333h)</option>
-                        <option value="Gold">4. Gold League (3,333 - 4,444h)</option>
-                        <option value="Diamond">5. Diamond League (4,444 - 5,556h)</option>
-                        <option value="Champion">6. Champion League (5,556 - 6,667h)</option>
-                        <option value="Expert">7. Expert League (6,667 - 7,778h)</option>
-                        <option value="Master">8. Master League (7,778 - 8,889h)</option>
-                        <option value="Legend">9. Legend League (8,889 - 10,000h)</option>
+                        <option value="ALL">All Leagues (9 Leagues / 162 Ranks)</option>
+                        <option value="Iron">1. Iron League (Day 0 - 13.3)</option>
+                        <option value="Bronze">2. Bronze League (Day 13.3 - 26.7)</option>
+                        <option value="Silver">3. Silver League (Day 26.7 - 40.0)</option>
+                        <option value="Gold">4. Gold League (Day 40.0 - 53.3)</option>
+                        <option value="Diamond">5. Diamond League (Day 53.3 - 66.7)</option>
+                        <option value="Champion">6. Champion League (Day 66.7 - 80.0)</option>
+                        <option value="Expert">7. Expert League (Day 80.0 - 93.3)</option>
+                        <option value="Master">8. Master League (Day 93.3 - 106.7)</option>
+                        <option value="Legend">9. Legend League (Day 106.7 - 120.0)</option>
                     </select>
                 </div>
 
@@ -319,32 +295,10 @@
             <div class="glass-panel rounded-3xl p-5 space-y-5 border border-slate-800">
                 <div class="border-b border-slate-800 pb-4">
                     <h2 class="text-lg font-extrabold text-white flex items-center space-x-2">
-                        <i class="fa-solid fa-calculator text-amber-400"></i>
-                        <span>Time Projections & Estimates</span>
+                        <i class="fa-solid fa-calendar-check text-amber-400"></i>
+                        <span>120-Day Target Milestone Schedule</span>
                     </h2>
-                    <p class="text-xs text-slate-400 mt-0.5">Calculate completion dates for all numerical ranks and major leagues (up to 24 hrs/day).</p>
-                </div>
-
-                <!-- Rate Input Controls -->
-                <div class="space-y-3 bg-slate-900/80 p-4 rounded-2xl border border-slate-800">
-                    <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
-                        <label class="text-xs font-bold uppercase tracking-wider text-slate-300">Planned Daily Practice Rate</label>
-                        <div class="flex items-center space-x-2">
-                            <input type="number" id="customPaceInput" min="0.1" max="24" step="0.1" value="1.5" oninput="onCustomPaceChange(this.value)" 
-                                class="w-20 bg-slate-950 border border-amber-500/50 rounded-lg px-2.5 py-1 text-xs font-mono font-bold text-amber-400 focus:outline-none text-center">
-                            <span class="text-xs font-semibold text-slate-400">hrs / day</span>
-                        </div>
-                    </div>
-
-                    <!-- Quick Preset Pills -->
-                    <div class="grid grid-cols-4 sm:grid-cols-6 gap-2 pt-1">
-                        <button onclick="setPace(0.5)" id="pace-0.5" class="pace-btn py-1.5 rounded-lg border border-slate-800 bg-slate-950 text-xs font-mono text-slate-300">0.5h</button>
-                        <button onclick="setPace(1.0)" id="pace-1.0" class="pace-btn py-1.5 rounded-lg border border-slate-800 bg-slate-950 text-xs font-mono text-slate-300">1.0h</button>
-                        <button onclick="setPace(1.5)" id="pace-1.5" class="pace-btn py-1.5 rounded-lg border border-amber-500/50 bg-amber-950/40 text-xs font-mono font-bold text-amber-300">1.5h</button>
-                        <button onclick="setPace(2.0)" id="pace-2.0" class="pace-btn py-1.5 rounded-lg border border-slate-800 bg-slate-950 text-xs font-mono text-slate-300">2.0h</button>
-                        <button onclick="setPace(4.0)" id="pace-4.0" class="pace-btn py-1.5 rounded-lg border border-slate-800 bg-slate-950 text-xs font-mono text-slate-300">4.0h</button>
-                        <button onclick="setPace(8.0)" id="pace-8.0" class="pace-btn py-1.5 rounded-lg border border-slate-800 bg-slate-950 text-xs font-mono text-slate-300">8.0h</button>
-                    </div>
+                    <p class="text-xs text-slate-400 mt-0.5">Exact projected dates for reaching all alphabetic sub-ranks and major leagues.</p>
                 </div>
 
                 <!-- Major League Projections Table -->
@@ -355,8 +309,7 @@
                             <thead>
                                 <tr class="bg-slate-900 text-slate-400 uppercase font-semibold border-b border-slate-800 text-[10px]">
                                     <th class="py-2.5 px-3">League</th>
-                                    <th class="py-2.5 px-3">Cap Hours</th>
-                                    <th class="py-2.5 px-3">Hours Left</th>
+                                    <th class="py-2.5 px-3">Target Day</th>
                                     <th class="py-2.5 px-3">Days Left</th>
                                     <th class="py-2.5 px-3 text-right">Target Date</th>
                                 </tr>
@@ -370,14 +323,13 @@
 
                 <!-- Sub-Rank Step Roadmap Table -->
                 <div class="space-y-2">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Upcoming Rank Milestones (Next 20 Ranks)</h3>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Upcoming Sub-Rank Steps (Next 18 Steps)</h3>
                     <div class="overflow-x-auto rounded-2xl border border-slate-800 max-h-72">
                         <table class="w-full text-left border-collapse text-xs">
                             <thead>
                                 <tr class="bg-slate-900 text-slate-400 uppercase font-semibold border-b border-slate-800 text-[10px] sticky top-0 z-10">
-                                    <th class="py-2.5 px-3">Rank Milestone</th>
-                                    <th class="py-2.5 px-3">Boundary</th>
-                                    <th class="py-2.5 px-3">Hours Left</th>
+                                    <th class="py-2.5 px-3">Sub-Rank</th>
+                                    <th class="py-2.5 px-3">Target Day</th>
                                     <th class="py-2.5 px-3">Days Left</th>
                                     <th class="py-2.5 px-3 text-right">Target Date</th>
                                 </tr>
@@ -402,10 +354,10 @@
             </button>
             <button onclick="switchTab('hierarchy')" id="tab-btn-hierarchy" class="py-1.5 rounded-xl flex flex-col items-center justify-center text-slate-400 transition">
                 <i class="fa-solid fa-layer-group text-base"></i>
-                <span class="text-[10px] font-bold mt-0.5">200 Ladder</span>
+                <span class="text-[10px] font-bold mt-0.5">162 Ladder</span>
             </button>
             <button onclick="switchTab('projections')" id="tab-btn-projections" class="py-1.5 rounded-xl flex flex-col items-center justify-center text-slate-400 transition">
-                <i class="fa-solid fa-calculator text-base"></i>
+                <i class="fa-solid fa-calendar-check text-base"></i>
                 <span class="text-[10px] font-bold mt-0.5">Projections</span>
             </button>
         </div>
@@ -414,69 +366,63 @@
     <!-- JAVASCRIPT APPLICATION LOGIC -->
     <script>
         /* ==========================================================================
-           1. STRICT 9 LEAGUES & 200 NUMERICAL RANKS PER LEAGUE MATH ARCHITECTURE
+           1. STRICT 9 LEAGUES & 162 ALPHABETIC SUB-RANKS ACROSS 120 DAYS
            ========================================================================== */
 
-        const RANKS_PER_LEAGUE = 200;
+        const TOTAL_DAYS = 120;
+        const TOTAL_RANKS = 162;
+        const DAYS_PER_RANK = TOTAL_DAYS / TOTAL_RANKS; // ~0.7407 days (17.77 hours) per sub-rank
 
-        // Exact 9 Leagues sequence kept identical with 10,000h milestones
+        const SUB_RANK_STEPS = ["E-", "E", "E+", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+", "S-", "S", "S+"];
+
+        // Exact 9 Leagues sequence with exact floating point fraction bounds
         const LEAGUES = [
-            { id: 1, name: "Iron", color: "#d6ffda", barColor: "#d6ffda", startHour: 0, endHour: 1111, quote: "Grounding posture and breath stability." },
-            { id: 2, name: "Bronze", color: "#d97706", barColor: "#fbbf24", startHour: 1111, endHour: 2222, quote: "Spark of stillness, reducing mental wander." },
-            { id: 3, name: "Silver", color: "#abffff", barColor: "#abffff", startHour: 2222, endHour: 3333, quote: "Refined clarity and tranquil presence." },
-            { id: 4, name: "Gold", color: "#eab308", barColor: "#facc15", startHour: 3333, endHour: 4444, quote: "Radiant single-pointed attention." },
-            { id: 5, name: "Diamond", color: "#06b6d4", barColor: "#22d3ee", startHour: 4444, endHour: 5556, quote: "Luminous non-reactive awareness." },
-            { id: 6, name: "Champion", color: "#8b5cf6", barColor: "#a78bfa", startHour: 5556, endHour: 6667, quote: "Effortless stability amidst sensation." },
-            { id: 7, name: "Expert", color: "#10b981", barColor: "#34d399", startHour: 6667, endHour: 7778, quote: "Profound insight into impermanence." },
-            { id: 8, name: "Master", color: "#f43f5e", barColor: "#fb7185", startHour: 7778, endHour: 8889, quote: "Seamless mindfulness in action." },
-            { id: 9, name: "Legend", color: "#ec4899", barColor: "#f472b6", startHour: 8889, endHour: 10000, quote: "Unshakable non-dual mastery." }
+            { id: 1, name: "Iron", color: "#d6ffda", barColor: "#d6ffda", startDay: 0, endDay: 120 * (1/9), quote: "Severing cheap dopamine and reclaiming baseline focus." },
+            { id: 2, name: "Bronze", color: "#d97706", barColor: "#fbbf24", startDay: 120 * (1/9), endDay: 120 * (2/9), quote: "Reducing restlessness, mental clarity emerging." },
+            { id: 3, name: "Silver", color: "#abffff", barColor: "#abffff", startDay: 120 * (2/9), endDay: 120 * (3/9), quote: "Enhanced deep focus and sustained motivation." },
+            { id: 4, name: "Gold", color: "#eab308", barColor: "#facc15", startDay: 120 * (3/9), endDay: 120 * (4/9), quote: "Rebalanced dopamine receptors and high drive." },
+            { id: 5, name: "Diamond", color: "#06b6d4", barColor: "#22d3ee", startDay: 120 * (4/9), endDay: 120 * (5/9), quote: "Unshakable self-discipline and emotional control." },
+            { id: 6, name: "Champion", color: "#8b5cf6", barColor: "#a78bfa", startDay: 120 * (5/9), endDay: 120 * (6/9), quote: "Mastery over cravings and cheap rewards." },
+            { id: 7, name: "Expert", color: "#10b981", barColor: "#34d399", startDay: 120 * (6/9), endDay: 120 * (7/9), quote: "Deep creative state and high neural plastic reset." },
+            { id: 8, name: "Master", color: "#f43f5e", barColor: "#fb7185", startDay: 120 * (7/9), endDay: 120 * (8/9), quote: "Complete rewiring of reward pathways." },
+            { id: 9, name: "Legend", color: "#ec4899", barColor: "#f472b6", startDay: 120 * (8/9), endDay: 120, quote: "Full Monarch Mind awakening—120 days complete." }
         ];
 
-        // Generate all sub-ranks: Each league has ranks 200 (lowest) down to 1 (highest)
+        // Generate all 162 sub-ranks cleanly mapped across 120 Days
         const ALL_SUB_RANKS = [];
-        let globalIndexCounter = 1;
+        let globalIndex = 1;
 
-        LEAGUES.forEach((league) => {
-            const leagueSpan = league.endHour - league.startHour;
-            const hoursPerRank = leagueSpan / RANKS_PER_LEAGUE;
+        LEAGUES.forEach(league => {
+            const leagueSpan = league.endDay - league.startDay;
+            const stepSpan = leagueSpan / 18;
 
-            for (let r = 200; r >= 1; r--) {
-                const rankIndexInLeague = 200 - r; // 0 for Rank 200, 199 for Rank 1
-                const subStart = Math.round(league.startHour + (rankIndexInLeague * hoursPerRank));
-                const subEnd = (r === 1) ? league.endHour : Math.round(league.startHour + ((rankIndexInLeague + 1) * hoursPerRank));
+            SUB_RANK_STEPS.forEach((step, idx) => {
+                const subStart = league.startDay + (idx * stepSpan);
+                const subEnd = idx === 17 ? league.endDay : league.startDay + ((idx + 1) * stepSpan);
 
                 ALL_SUB_RANKS.push({
-                    rankNumber: r,
-                    globalIndex: globalIndexCounter++,
-                    leagueId: league.id,
+                    globalIndex: globalIndex++,
                     leagueName: league.name,
                     leagueColor: league.color,
                     leagueBarColor: league.barColor,
-                    stepCode: `${league.name} Rank ${r}`,
-                    fullTitle: `${league.name} Rank ${r}`,
-                    startHour: subStart,
-                    endHour: subEnd,
-                    requiredHours: subEnd - subStart,
+                    stepCode: step,
+                    fullTitle: `${league.name} ${step}`,
+                    startDay: subStart,
+                    endDay: subEnd,
+                    requiredDays: subEnd - subStart,
                     quote: league.quote
                 });
-            }
+            });
         });
 
         /* ==========================================================================
-           2. APP STATE MANAGEMENT
+           2. APP STATE MANAGEMENT & HARDCODED START DATE
            ========================================================================== */
 
-        let currentHours = 0;
+        // HARDCODED START DATE
+        const startDateMs = new Date("2026-10-23T21:30:00").getTime();
+        let currentDays = 0;
         let activeTab = 'tracker';
-        let plannedPace = 1.5;
-
-        // Load saved state
-        try {
-            const saved = localStorage.getItem('satori_meditation_hours');
-            if (saved !== null) {
-                currentHours = Math.max(0, Math.min(10000, parseInt(saved, 10) || 0));
-            }
-        } catch (e) {}
 
         /* ==========================================================================
            3. SVG EMBLEM ARTWORK GENERATOR
@@ -500,19 +446,18 @@
            4. MATHEMATICAL TRUNCATION & BOUND HELPERS
            ========================================================================== */
 
-        function getSubRank(hours) {
-            const h = Math.max(0, Math.min(10000, hours));
-            if (h >= 10000) return ALL_SUB_RANKS[ALL_SUB_RANKS.length - 1]; // Legend Rank 1
-            return ALL_SUB_RANKS.find(sr => h >= sr.startHour && h < sr.endHour) || ALL_SUB_RANKS[0];
+        function getSubRank(days) {
+            const d = Math.max(0, Math.min(TOTAL_DAYS, days));
+            if (d >= TOTAL_DAYS) return ALL_SUB_RANKS[ALL_SUB_RANKS.length - 1]; // Legend S+
+            return ALL_SUB_RANKS.find(sr => d >= sr.startDay && d < sr.endDay) || ALL_SUB_RANKS[0];
         }
 
-        function getLeague(hours) {
-            const h = Math.max(0, Math.min(10000, hours));
-            if (h >= 10000) return LEAGUES[LEAGUES.length - 1];
-            return LEAGUES.find(l => h >= l.startHour && h < l.endHour) || LEAGUES[0];
+        function getLeague(days) {
+            const d = Math.max(0, Math.min(TOTAL_DAYS, days));
+            if (d >= TOTAL_DAYS) return LEAGUES[LEAGUES.length - 1];
+            return LEAGUES.find(l => d >= l.startDay && d < l.endDay) || LEAGUES[0];
         }
 
-        // Exact 1-decimal truncated percentage (no rounding up/down)
         function formatTruncatedPct(val) {
             if (val >= 100) return "100.0%";
             if (val <= 0) return "0.0%";
@@ -525,111 +470,94 @@
            ========================================================================== */
 
         function updateUI() {
-            const subRank = getSubRank(currentHours);
-            const league = getLeague(currentHours);
+            const now = Date.now();
+            const elapsedMs = Math.max(0, now - startDateMs);
+            currentDays = Math.min(TOTAL_DAYS, elapsedMs / (1000 * 60 * 60 * 24));
 
-            // Persist
-            try {
-                localStorage.setItem('satori_meditation_hours', currentHours.toString());
-            } catch (e) {}
+            const subRank = getSubRank(currentDays);
+            const league = getLeague(currentDays);
+
+            // Clock display breakdown
+            const totalSecs = Math.floor(elapsedMs / 1000);
+            const dVal = Math.floor(totalSecs / (24 * 3600));
+            const hVal = Math.floor((totalSecs % (24 * 3600)) / 3600);
+            const mVal = Math.floor((totalSecs % 3600) / 60);
+            const sVal = totalSecs % 60;
+
+            document.getElementById('live-days').textContent = String(dVal).padStart(2, '0');
+            document.getElementById('live-hours').textContent = String(hVal).padStart(2, '0');
+            document.getElementById('live-mins').textContent = String(mVal).padStart(2, '0');
+            document.getElementById('live-secs').textContent = String(sVal).padStart(2, '0');
 
             // Header Elements
-            document.getElementById('headerHoursBadge').textContent = `${currentHours.toLocaleString()} / 10,000 hrs`;
+            document.getElementById('headerHoursBadge').textContent = `Day ${currentDays.toFixed(2)} / 120`;
             document.getElementById('headerLeagueEmblem').innerHTML = getLeagueSVG(league.name, 26);
 
             // Hero Card
             document.getElementById('heroEmblemContainer').innerHTML = getLeagueSVG(league.name, 60);
             document.getElementById('heroLeagueBadge').textContent = `${league.name.toUpperCase()} LEAGUE`;
             document.getElementById('heroLeagueBadge').style.color = league.color;
-            document.getElementById('heroSubRankStepTag').textContent = `RANK ${subRank.rankNumber} / 200`;
+            document.getElementById('heroSubRankStepTag').textContent = `STEP ${subRank.globalIndex} / 162`;
             document.getElementById('heroSubRankTitle').textContent = subRank.fullTitle;
             document.getElementById('heroSubRankDesc').textContent = `"${subRank.quote}"`;
-            document.getElementById('heroCurrentHours').textContent = currentHours.toLocaleString();
+            document.getElementById('heroCurrentHours').textContent = currentDays.toFixed(2);
             document.getElementById('heroGlowBg').style.backgroundColor = league.color;
 
-            // Slider Position Sync
-            const slider = document.getElementById('hoursSlider');
-            if (parseInt(slider.value, 10) !== currentHours) {
-                slider.value = currentHours;
-            }
+            // --- 1. CURRENT SUB-RANK PROGRESS METER ---
+            const subRankDaysIn = Math.max(0, currentDays - subRank.startDay);
+            const subRankSpan = subRank.endDay - subRank.startDay;
+            const subRankRawPct = currentDays >= TOTAL_DAYS ? 100 : Math.min(100, Math.max(0, (subRankDaysIn / subRankSpan) * 100));
+            const subRankPctFormatted = formatTruncatedPct(subRankRawPct);
 
-            // --- 1. SUB-RANK COMPARATIVE PROGRESS METER ---
-            const subRankHoursIn = currentHours - subRank.startHour;
-            const subRankSpan = Math.max(1, subRank.endHour - subRank.startHour);
-            const subRankRawPct = currentHours >= 10000 ? 100 : Math.min(100, Math.max(0, (subRankHoursIn / subRankSpan) * 100));
-            const nextSubRankObj = ALL_SUB_RANKS.find(sr => sr.globalIndex === subRank.globalIndex + 1) || ALL_SUB_RANKS[ALL_SUB_RANKS.length - 1];
-
-            document.getElementById('meterSubRankTitle').textContent = currentHours >= 10000 ? 'Legend Rank 1 Complete' : `To ${nextSubRankObj.fullTitle}`;
-            document.getElementById('meterSubRankPct').textContent = formatTruncatedPct(subRankRawPct);
+            document.getElementById('meterSubRankTitle').textContent = subRank.fullTitle;
+            document.getElementById('meterSubRankPct').textContent = subRankPctFormatted;
             document.getElementById('meterSubRankBar').style.width = `${subRankRawPct.toFixed(4)}%`;
             document.getElementById('meterSubRankBar').style.backgroundColor = league.barColor;
-            document.getElementById('meterSubRankCurrent').textContent = `${currentHours.toLocaleString()} hrs`;
-            document.getElementById('meterSubRankTarget').textContent = `Target: ${subRank.endHour.toLocaleString()} hrs`;
-            document.getElementById('meterSubRankRemaining').textContent = `${Math.max(0, subRank.endHour - currentHours).toLocaleString()} hrs remaining to advance`;
+            document.getElementById('meterSubRankCurrent').textContent = `Progress Made: ${subRankPctFormatted}`;
+            document.getElementById('meterSubRankRemaining').textContent = `${Math.max(0, subRank.endDay - currentDays).toFixed(1)} days left to complete  ${subRank.fullTitle}`;
 
-            // --- 2. INTRA-LEAGUE RELATIVE COMPARATIVE PROGRESS METER ---
-            const nextLeagueObj = LEAGUES.find(l => l.id === league.id + 1) || LEAGUES[LEAGUES.length - 1];
-            const leagueHoursIn = currentHours - league.startHour;
-            const leagueSpan = league.endHour - league.startHour;
-            const leagueRawPct = currentHours >= 10000 ? 100 : Math.min(100, Math.max(0, (leagueHoursIn / leagueSpan) * 100));
+            // --- 2. CURRENT MAJOR LEAGUE PROGRESS METER ---
+            const leagueDaysIn = Math.max(0, currentDays - league.startDay);
+            const leagueSpan = league.endDay - league.startDay;
+            const leagueRawPct = currentDays >= TOTAL_DAYS ? 100 : Math.min(100, Math.max(0, (leagueDaysIn / leagueSpan) * 100));
+            const leaguePctFormatted = formatTruncatedPct(leagueRawPct);
 
-            document.getElementById('meterLeagueTitle').textContent = currentHours >= 10000 ? 'All Leagues Complete' : `To ${nextLeagueObj.name} League`;
-            document.getElementById('meterLeaguePct').textContent = formatTruncatedPct(leagueRawPct);
+            document.getElementById('meterLeagueTitle').textContent = `${league.name} League`;
+            document.getElementById('meterLeaguePct').textContent = leaguePctFormatted;
             document.getElementById('meterLeagueBar').style.width = `${leagueRawPct.toFixed(4)}%`;
-            document.getElementById('meterLeagueCurrent').textContent = `${currentHours.toLocaleString()} hrs`;
-            document.getElementById('meterLeagueTarget').textContent = `Target: ${league.endHour.toLocaleString()} hrs`;
-            document.getElementById('meterLeagueRemaining').textContent = `${Math.max(0, league.endHour - currentHours).toLocaleString()} hrs remaining to ${nextLeagueObj.name}`;
+            document.getElementById('meterLeagueCurrent').textContent = `Progress Made: ${leaguePctFormatted}`;
+            document.getElementById('meterLeagueRemaining').textContent = `${Math.max(0, league.endDay - currentDays).toFixed(1)} days left to complete ${league.name} League`;
 
-            // --- 3. GRAND 10,000h JOURNEY CAP METER ---
-            const grandRawPct = (currentHours / 10000) * 100;
-            document.getElementById('meterGrandPct').textContent = formatTruncatedPct(grandRawPct);
+            // --- 3. GRAND 120-DAY JOURNEY CAP METER ---
+            const grandRawPct = (currentDays / TOTAL_DAYS) * 100;
+            const grandPctFormatted = formatTruncatedPct(grandRawPct);
+
+            document.getElementById('meterGrandPct').textContent = grandPctFormatted;
             document.getElementById('meterGrandBar').style.width = `${grandRawPct.toFixed(4)}%`;
-            document.getElementById('meterGrandCurrent').textContent = `${currentHours.toLocaleString()} hrs`;
-            document.getElementById('meterGrandRemaining').textContent = `${Math.max(0, 10000 - currentHours).toLocaleString()} hours remaining to Legend Rank 1`;
+            document.getElementById('meterGrandCurrent').textContent = `Progress Made: ${grandPctFormatted}`;
+            document.getElementById('meterGrandRemaining').textContent = `${Math.max(0, TOTAL_DAYS - currentDays).toFixed(1)} days left to complete the 120 days detox goal`;
 
-            // Refresh Active Tab Views
-            if (activeTab === 'hierarchy') renderHierarchy(document.getElementById('leagueFilterSelect').value);
+            // Refresh Active Tab Views safely
+            const filterSelect = document.getElementById('leagueFilterSelect');
+            if (activeTab === 'hierarchy') renderHierarchy(filterSelect ? filterSelect.value : "ALL");
             if (activeTab === 'projections') renderProjections();
         }
 
         /* ==========================================================================
-           6. CONTROLS & HOUR ADJUSTMENTS
-           ========================================================================== */
-
-        function setHours(val) {
-            currentHours = Math.max(0, Math.min(10000, parseInt(val, 10) || 0));
-            updateUI();
-        }
-
-        function adjustHours(delta) {
-            setHours(currentHours + delta);
-        }
-
-        function promptCustomHours() {
-            const input = prompt("Enter your exact total meditation hours completed (0 - 10,000):", currentHours);
-            if (input !== null) {
-                const parsed = parseInt(input, 10);
-                if (!isNaN(parsed)) setHours(parsed);
-            }
-        }
-
-        document.getElementById('hoursSlider').addEventListener('input', (e) => {
-            setHours(e.target.value);
-        });
-
-        /* ==========================================================================
-           7. TAB 2: 200 NUMERICAL RANK LADDER VIEW PER LEAGUE
+           6. TAB 2: 162 ALPHABETIC SUB-RANK LADDER VIEW
            ========================================================================== */
 
         function renderHierarchy(filter = "ALL") {
+            const selectedFilter = filter || "ALL";
             const container = document.getElementById('hierarchyContainer');
+            if (!container) return;
             container.innerHTML = '';
 
-            const filteredLeagues = filter === "ALL" ? LEAGUES : LEAGUES.filter(l => l.name === filter);
+            const filteredLeagues = selectedFilter === "ALL" ? LEAGUES : LEAGUES.filter(l => l.name === selectedFilter);
 
             filteredLeagues.forEach(league => {
                 const leagueSubRanks = ALL_SUB_RANKS.filter(sr => sr.leagueName === league.name);
-                const isCurrentLeague = currentHours >= league.startHour && currentHours < league.endHour;
+                const isCurrentLeague = currentDays >= league.startDay && currentDays < league.endDay;
 
                 const card = document.createElement('div');
                 card.className = `glass-panel rounded-2xl overflow-hidden border transition ${isCurrentLeague ? 'border-amber-500/60 shadow-lg shadow-amber-500/10' : 'border-slate-800'}`;
@@ -642,19 +570,19 @@
                             </div>
                             <div>
                                 <h3 class="font-bold text-xs text-white">${league.name} League</h3>
-                                <p class="text-[10px] text-slate-400 font-mono">${league.startHour.toLocaleString()}h — ${league.endHour.toLocaleString()}h</p>
+                                <p class="text-[10px] text-slate-400 font-mono">Day ${league.startDay.toFixed(1)} — Day ${league.endDay.toFixed(1)}</p>
                             </div>
                         </div>
                         <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-slate-800 text-slate-300">
-                            200 Ranks (Rank 200 to 1)
+                            18 Sub-Ranks
                         </span>
                     </div>
-                    <div class="p-2.5 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2 bg-slate-950/40 max-h-64 overflow-y-auto">
+                    <div class="p-2.5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 bg-slate-950/40">
                 `;
 
                 leagueSubRanks.forEach(sr => {
-                    const isPassed = currentHours >= sr.endHour;
-                    const isCurrent = currentHours >= sr.startHour && currentHours < sr.endHour;
+                    const isPassed = currentDays >= sr.endDay;
+                    const isCurrent = currentDays >= sr.startDay && currentDays < sr.endDay;
 
                     let bgStyle = "bg-slate-900/60 border-slate-800 text-slate-500";
                     if (isPassed) bgStyle = "bg-slate-800/80 border-slate-700 text-slate-300";
@@ -662,8 +590,8 @@
 
                     html += `
                         <div class="p-2 rounded-xl border text-center transition ${bgStyle}">
-                            <div class="text-xs font-bold font-mono">Rank ${sr.rankNumber}</div>
-                            <div class="text-[9px] opacity-75 font-mono mt-0.5">${sr.startHour}-${sr.endHour}h</div>
+                            <div class="text-xs font-bold font-mono">${sr.stepCode}</div>
+                            <div class="text-[9px] opacity-75 font-mono mt-0.5">${sr.startDay.toFixed(1)}-${sr.endDay.toFixed(1)}d</div>
                         </div>
                     `;
                 });
@@ -675,48 +603,20 @@
         }
 
         /* ==========================================================================
-           8. TAB 3: TIME PROJECTIONS & ESTIMATES
+           7. TAB 3: TIME PROJECTIONS & ESTIMATES
            ========================================================================== */
 
-        function setPace(val) {
-            plannedPace = Math.max(0.1, Math.min(24, parseFloat(val) || 1.5));
-            document.getElementById('customPaceInput').value = plannedPace;
-
-            document.querySelectorAll('.pace-btn').forEach(btn => {
-                btn.classList.remove('border-amber-500/50', 'bg-amber-950/40', 'text-amber-300', 'font-bold');
-                btn.classList.add('border-slate-800', 'bg-slate-950', 'text-slate-300');
-            });
-            const activeBtn = document.getElementById(`pace-${plannedPace}`);
-            if (activeBtn) {
-                activeBtn.classList.add('border-amber-500/50', 'bg-amber-950/40', 'text-amber-300', 'font-bold');
-            }
-
-            renderProjections();
-        }
-
-        function onCustomPaceChange(val) {
-            const parsed = parseFloat(val);
-            if (!isNaN(parsed) && parsed > 0) {
-                plannedPace = Math.min(24, parsed);
-                renderProjections();
-            }
-        }
-
         function renderProjections() {
-            const today = new Date();
-
             // 1. Render League Projections
             const leagueBody = document.getElementById('leagueProjectionsBody');
+            if (!leagueBody) return;
             leagueBody.innerHTML = '';
 
             LEAGUES.forEach(league => {
-                const remaining = Math.max(0, league.endHour - currentHours);
-                const daysNeeded = Math.ceil(remaining / plannedPace);
+                const remainingDays = Math.max(0, league.endDay - currentDays);
+                const targetDate = new Date(startDateMs + (league.endDay * 24 * 60 * 60 * 1000));
 
-                const targetDate = new Date(today);
-                targetDate.setDate(targetDate.getDate() + daysNeeded);
-
-                const formattedDate = remaining === 0 
+                const formattedDate = remainingDays === 0 
                     ? '<span class="text-emerald-400 font-bold">ACHIEVED</span>' 
                     : targetDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 
@@ -727,28 +627,25 @@
                         <span class="w-2 h-2 rounded-full" style="background-color: ${league.color}"></span>
                         <span class="text-slate-200">${league.name}</span>
                     </td>
-                    <td class="py-2.5 px-3 text-slate-400">${league.endHour.toLocaleString()}h</td>
-                    <td class="py-2.5 px-3 text-amber-300 font-bold">${remaining.toLocaleString()}h</td>
-                    <td class="py-2.5 px-3 text-slate-400">${daysNeeded.toLocaleString()}d</td>
+                    <td class="py-2.5 px-3 text-slate-400">Day ${league.endDay.toFixed(1)}</td>
+                    <td class="py-2.5 px-3 text-amber-300 font-bold">${remainingDays.toFixed(1)}d</td>
                     <td class="py-2.5 px-3 text-right text-sky-400">${formattedDate}</td>
                 `;
                 leagueBody.appendChild(tr);
             });
 
-            // 2. Render Sub-Rank Projections (Next 20 Upcoming Numerical Steps)
+            // 2. Render Sub-Rank Projections (Next 18 Upcoming Steps)
             const subRankBody = document.getElementById('subRankProjectionsBody');
+            if (!subRankBody) return;
             subRankBody.innerHTML = '';
 
-            const upcomingSubRanks = ALL_SUB_RANKS.filter(sr => sr.endHour > currentHours).slice(0, 20);
+            const upcomingSubRanks = ALL_SUB_RANKS.filter(sr => sr.endDay > currentDays).slice(0, 18);
 
             upcomingSubRanks.forEach(sr => {
-                const remaining = Math.max(0, sr.endHour - currentHours);
-                const daysNeeded = Math.ceil(remaining / plannedPace);
+                const remainingDays = Math.max(0, sr.endDay - currentDays);
+                const targetDate = new Date(startDateMs + (sr.endDay * 24 * 60 * 60 * 1000));
 
-                const targetDate = new Date(today);
-                targetDate.setDate(targetDate.getDate() + daysNeeded);
-
-                const formattedDate = remaining === 0 
+                const formattedDate = remainingDays === 0 
                     ? '<span class="text-emerald-400 font-bold">ACHIEVED</span>' 
                     : targetDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 
@@ -756,9 +653,8 @@
                 tr.className = "hover:bg-slate-900/60 transition";
                 tr.innerHTML = `
                     <td class="py-2.5 px-3 font-semibold text-slate-200">${sr.fullTitle}</td>
-                    <td class="py-2.5 px-3 text-slate-400">${sr.endHour.toLocaleString()}h</td>
-                    <td class="py-2.5 px-3 text-amber-300 font-bold">${remaining.toLocaleString()}h</td>
-                    <td class="py-2.5 px-3 text-slate-400">${daysNeeded.toLocaleString()}d</td>
+                    <td class="py-2.5 px-3 text-slate-400">Day ${sr.endDay.toFixed(1)}</td>
+                    <td class="py-2.5 px-3 text-amber-300 font-bold">${remainingDays.toFixed(1)}d</td>
                     <td class="py-2.5 px-3 text-right text-sky-400">${formattedDate}</td>
                 `;
                 subRankBody.appendChild(tr);
@@ -766,7 +662,7 @@
         }
 
         /* ==========================================================================
-           9. NAVIGATION TAB SWITCHER
+           8. NAVIGATION TAB SWITCHER
            ========================================================================== */
 
         function switchTab(tabName) {
@@ -791,14 +687,15 @@
             }
 
             // Render view-specific content
-            if (tabName === 'hierarchy') renderHierarchy(document.getElementById('leagueFilterSelect').value);
+            const filterSelect = document.getElementById('leagueFilterSelect');
+            if (tabName === 'hierarchy') renderHierarchy(filterSelect ? filterSelect.value : "ALL");
             if (tabName === 'projections') renderProjections();
         }
 
-        /* Initial boot */
+        /* Initial boot & timer loop */
         window.onload = function() {
             updateUI();
-            setPace(1.5);
+            setInterval(updateUI, 1000);
         };
     </script>
 </body>
